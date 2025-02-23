@@ -1,5 +1,6 @@
 import { SecondaryButton } from "@twa-dev/sdk/react";
 import { Colors } from "../config/colors";
+import { useForceUpdate } from "../hooks/useForceUpdate";
 
 interface Props {
   disabled?: boolean;
@@ -12,22 +13,27 @@ interface Props {
 }
 
 export function MySecondaryButton(
-  { text, 
+  {text, 
   textColor = Colors.accent, 
   color = Colors.black.secondary, 
   progress,
   onClick,
   disabled,
-  position = "left" }: Props) {
+  position = "left"}: Props) {
+
+  const forceUpdate = useForceUpdate();
+
   return (
     <SecondaryButton 
-      key={text}  // Добавляем ключ, основанный на тексте кнопки
       text={text} 
       textColor={textColor} 
       color={color} 
       progress={progress} 
       disabled={disabled} 
-      onClick={onClick} 
+      onClick={() => {
+        onClick?.();
+        forceUpdate(); // Принудительный ререндеринг
+      }} 
       position={position}
     />
   );

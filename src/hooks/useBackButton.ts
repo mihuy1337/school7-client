@@ -14,7 +14,6 @@ export function useBackButton({ onClick }: Props = {}) {
 
   useEffect(() => {
     button.show();
-
     button.onClick(handleClick);
 
     return () => {
@@ -22,7 +21,4 @@ export function useBackButton({ onClick }: Props = {}) {
       button.hide();
     };
   }, [handleClick]);
-
-  return;
 }
-

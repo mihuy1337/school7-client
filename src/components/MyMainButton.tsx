@@ -1,5 +1,6 @@
 import { MainButton } from "@twa-dev/sdk/react";
 import { Colors } from "../config/colors";
+import { useForceUpdate } from "../hooks/useForceUpdate";
 
 interface Props {
   disabled?: boolean;
@@ -11,21 +12,26 @@ interface Props {
 }
 
 export function MyMainButton(
-  { text, 
+  {text, 
   textColor = Colors.black.main, 
   color = Colors.accent, 
   progress,
   onClick,
-  disabled }: Props) {
+  disabled}: Props) {
+  
+  const forceUpdate = useForceUpdate();
+
   return (
     <MainButton 
-      key={text}  // Добавляем ключ, основанный на тексте кнопки
       text={text} 
       textColor={textColor} 
       color={color} 
       progress={progress} 
       disabled={disabled} 
-      onClick={onClick}
+      onClick={() => {
+        onClick?.();
+        forceUpdate(); // Принудительный ререндеринг
+      }}
     />
   );
 }
