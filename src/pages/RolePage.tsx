@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import pic1 from "../assets/pic1.svg"
 import pic2 from "../assets/pic2.svg"
 import { useBackButton } from "../hooks/useBackButton";
@@ -5,10 +6,11 @@ import { useMainButton } from "../hooks/useMainButton";
 import { useSecondaryButton } from "../hooks/useSecondaryButton";
 
 export function RolePage() {
+  const navigate = useNavigate()
   useBackButton()
 
-  useMainButton({text: 'Ученик', })
-  useSecondaryButton({text: 'Учитель'})
+  useMainButton({text: 'Ученик', onClick: () => navigate("/register/role/student")})
+  useSecondaryButton({text: 'Учитель', onClick: () => navigate("/register/role/teacher")})
 
   return (
     <div className="flex flex-col space-y-8 h-screen justify-center items-center bg-black-main">
