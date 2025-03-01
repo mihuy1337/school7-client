@@ -4,7 +4,7 @@ import pic1 from "../../assets/pic1.svg";
 import { useBackButton } from "../../hooks/useBackButton";
 import { useMainButton } from "../../hooks/useMainButton";
 import { useAtom } from "jotai";
-import { IRoles } from "../../types/Roles";
+import { IRoles } from "../../types/roles.types";
 import { roleAtom } from "../../store";
 import { useEffect } from "react";
 

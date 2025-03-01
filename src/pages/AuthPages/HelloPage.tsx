@@ -7,7 +7,7 @@ import { useSecondaryButton } from "../../hooks/useSecondaryButton";
 export function HelloPage() {
   const navigate = useNavigate()
 
-  useMainButton({text: 'Да', })
+  useMainButton({text: 'Да', onClick: () => navigate("/login")})
   useSecondaryButton({text: 'Нет', onClick: () => navigate("/register/role")})
 
   return (
