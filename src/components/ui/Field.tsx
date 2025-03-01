@@ -16,7 +16,7 @@ export const Field = forwardRef<HTMLInputElement, InputFieldProps>(({id, type, p
         type={type}
         id={id}
         placeholder={placeholder}
-        className="focus:outline-none border-3 border-transparent focus:border-accent focus:ring-accent transition-all duration-300 p-4 w-full bg-black-secondary text-hint font-medium text-white-main text-base rounded-xl"
+        className="focus:outline-none border-1 border-transparent focus:border-accent focus:ring-accent transition-all duration-300 p-4 w-full bg-black-secondary text-hint font-medium text-white-main text-base rounded-xl"
       />
     </>
   )
