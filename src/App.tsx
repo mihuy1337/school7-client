@@ -3,11 +3,10 @@ import { AppRoutes } from './routes'
 
 function App() {
   useInitApp()
-
   return (
-    <>
+    <div className=''>
       <AppRoutes />
-    </>
+    </div>
   )
 }
 

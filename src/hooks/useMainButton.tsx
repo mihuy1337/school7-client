@@ -34,7 +34,6 @@ export function useMainButton({
 
     return () => {
       button.offClick(onClick ?? (() => {}));
-      button.hide();
     };
   }, [text, color, textColor, onClick, progress, disabled]);
 }

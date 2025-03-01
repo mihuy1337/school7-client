@@ -20,8 +20,11 @@
   --color-2-main: #FF9393;
 
   --font-rubik: "Rubik", sans-serif;
+
+  --spacing-safe-top: var(--tg-content-safe-area-inset-top);
+  --spacing-safe-bottom: var(--tg-content-safe-area-inset-bottom)
 }
 
 body {
-  @apply bg-black-main text-white-main p-4
+  @apply font-rubik bg-black-main text-white-main px-4 pb-safe-bottom
 }

@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router";
-import pic1 from "../assets/pic1.svg"
-import pic2 from "../assets/pic2.svg"
-import { useBackButton } from "../hooks/useBackButton";
-import { useMainButton } from "../hooks/useMainButton";
-import { useSecondaryButton } from "../hooks/useSecondaryButton";
+import pic1 from "../../assets/pic1.svg"
+import pic2 from "../../assets/pic2.svg"
+import { useBackButton } from "../../hooks/useBackButton";
+import { useMainButton } from "../../hooks/useMainButton";
+import { useSecondaryButton } from "../../hooks/useSecondaryButton";
 
 export function RolePage() {
   const navigate = useNavigate()
