@@ -6,7 +6,7 @@ import { useClasses } from "../../hooks/useClasses";
 import { Loading } from "../../components/Loading";
 
 export function RegistrationPage() {
-  const [selectedValue, setSelectedValue] = useState("student");
+  const [selectedValue, setSelectedValue] = useState('');
   const { data, isLoading, isSuccess } = useClasses(); // Деструктурируем объект
 
   useBackButton();
@@ -31,9 +31,10 @@ export function RegistrationPage() {
               id="role"
               value={selectedValue}
               onChange={(e) => setSelectedValue(e.target.value)}
+              className="focus:outline-none border-2 border-transparent focus:border-accent focus:ring-accent transition-all duration-300 p-4 w-full bg-black-secondary text-hint font-medium text-white-main text-base rounded-xl pr-4"
             >
               {data.map((c) => (
-                <option key={c.id} value={c.id}>
+                <option key={c.id} value={c.id} className="text-white-main p-4">
                   {c.className}
                 </option>
               ))}
