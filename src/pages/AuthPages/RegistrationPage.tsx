@@ -31,7 +31,7 @@ export function RegistrationPage() {
               id="role"
               value={selectedValue}
               onChange={(e) => setSelectedValue(e.target.value)}
-              className="focus:outline-none border-2 border-transparent focus:border-accent focus:ring-accent transition-all duration-300 p-4 w-full bg-black-secondary text-hint font-medium text-white-main text-base rounded-xl pr-4"
+              className="appearance-none focus:outline-none border-2 border-transparent focus:border-accent focus:ring-accent transition-all duration-300 p-4 w-full bg-black-secondary text-hint font-medium text-white-main text-base rounded-xl"
             >
               {data.map((c) => (
                 <option key={c.id} value={c.id} className="text-white-main p-4">
