@@ -8,7 +8,7 @@ interface InputFieldProps {
 	type?: string
 }
 
-export const Field = forwardRef<HTMLInputElement, InputFieldProps>(({id, type, placeholder}: InputFieldProps, ref) => {
+export const Field = forwardRef<HTMLInputElement, InputFieldProps>(({id, type, placeholder, ...rest}: InputFieldProps, ref) => {
   return (
     <>
       <input
@@ -17,6 +17,7 @@ export const Field = forwardRef<HTMLInputElement, InputFieldProps>(({id, type, p
         id={id}
         placeholder={placeholder}
         className="focus:outline-none border-2 border-transparent focus:border-accent focus:ring-accent transition-all duration-300 p-4 w-full bg-black-secondary text-hint font-medium text-white-main text-base rounded-xl"
+        {...rest}
       />
     </>
   )

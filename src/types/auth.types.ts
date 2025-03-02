@@ -1,4 +1,3 @@
-import { IRoles } from "./roles.types";
 
 export interface ILoginForm {
 	username: string
@@ -7,13 +6,13 @@ export interface ILoginForm {
 }
 
 export interface IRegisterForm {
-	id: string;
   username: string;
+	password: string;
   firstName: string;
   lastName: string;
   middleName?: string;
   classId?: string;
-  role?: IRoles;
+  role?: "student" | "teacher";
 }
 
 export interface IAuthResponse {

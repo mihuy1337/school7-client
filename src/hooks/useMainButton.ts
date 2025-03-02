@@ -29,11 +29,16 @@ export function useMainButton({
       is_active: !disabled,
     });
 
-    button.onClick(onClick ?? (() => {}));
+    const handleClick = () => {
+      onClick?.(); // 👈 Вызываем onClick только если он есть
+    };
+
+    button.onClick(handleClick);
     button.show();
 
     return () => {
-      button.offClick(onClick ?? (() => {}));
+      button.offClick(handleClick); // 👈 Отписываем именно этот обработчик
     };
   }, [text, color, textColor, onClick, progress, disabled]);
 }
+
