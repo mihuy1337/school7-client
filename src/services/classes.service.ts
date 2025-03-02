@@ -2,7 +2,7 @@ import { axiosClassic } from "../api/interceptors"
 import { IClasses } from "../types/classes.types"
 
 class ClassService {
-	private BASE_URL = '/user/profile'
+	private BASE_URL = '/class'
 
 	async getClasses() {
 		const response = await axiosClassic.get<IClasses[]>(this.BASE_URL)

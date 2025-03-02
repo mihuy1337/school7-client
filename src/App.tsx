@@ -1,13 +1,17 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useInitApp } from './hooks/useInitApp'
 import { AppRoutes } from './routes'
+
+const queryClient = new QueryClient()
 
 function App() {
   useInitApp()
   return (
-    <div className=''>
+    <QueryClientProvider client={queryClient}>
       <AppRoutes />
-    </div>
+    </QueryClientProvider>
   )
 }
+
 
 export default App
