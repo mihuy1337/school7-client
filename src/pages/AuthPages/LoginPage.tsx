@@ -31,7 +31,7 @@ export function LoginPage() {
       ...formData,
     });
   };
-  useMainButton({ text: "Войти", onClick: () => handleSubmit(onSubmit)});
+  useMainButton({ text: "Войти", onClick: handleSubmit(onSubmit)});
   return (
     <div className="min-h-screen flex flex-col justify-center items-center pt-safe-top">
       <div className="w-full">
