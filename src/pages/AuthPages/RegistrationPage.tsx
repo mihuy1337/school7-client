@@ -15,34 +15,37 @@ export function RegistrationPage() {
   const { data, isLoading, isSuccess } = useClasses();
   const role = useAtomValue(roleAtom);
 
-  const { register, handleSubmit, reset } = useForm<IRegisterForm>({
-    mode: "onChange",
-  });
-
-  const { mutate } = useMutation({
-    mutationKey: ["auth"],
-    mutationFn: (data: IRegisterForm) => authService.register(data),
-    onSuccess() {
-      reset();
-    },
-  });
-
-  const onSubmit: SubmitHandler<IRegisterForm> = (formData) => {
-    console.log("Данные формы перед отправкой:", formData);
-    mutate({
-      ...formData,
-      role: role.role, // Добавляем роль перед отправкой
-    });
-  };
-
   useBackButton();
   useMainButton({ 
     text: "Зарегистрироваться", 
     disabled: isLoading,  
     onClick: () => {
-      console.log("Кнопка нажата!"); // 👈 Проверяем, вызывается ли обработчик
       handleSubmit(onSubmit)()}
   });
+
+  const { register, handleSubmit, reset, formState } = useForm<IRegisterForm>({
+    mode: "onChange",
+  });
+
+  const { mutate, } = useMutation({
+    mutationKey: ["auth"],
+    mutationFn: (data: IRegisterForm) => authService.register(data),
+    onSuccess() {
+      WebApp.showAlert("Ты зарегистрирован, остальное в процессе...")
+      reset();
+    },
+    onError() {
+      WebApp.showAlert("Какая-то ошибка...")
+      reset()
+    }
+  });
+
+  const onSubmit: SubmitHandler<IRegisterForm> = (formData) => {
+    mutate({
+      ...formData,
+      role: role.role,
+    });
+  };
 
   if (isLoading) {
     WebApp.MainButton.showProgress();
@@ -56,10 +59,10 @@ export function RegistrationPage() {
         <div className="w-full">
           <h1 className="text-3xl font-semibold">Регистрация</h1>
           <form className="space-y-4 mt-6">
-            <Field id="login" placeholder="Придумай логин" type="text" {...register("username", { required: "Введи логин!" })} />
-            <Field id="password" placeholder="Придумай пароль" type="password" {...register("password", { required: "Пароль введи!" })} />
-            <Field id="name" placeholder="Имя" type="text" {...register("firstName", { required: "У тебя че имени нет!?" })} />
-            <Field id="lastname" placeholder="Фамилия" type="text" {...register("lastName", { required: "Ты че детдомовский?!" })} />
+            <Field error={formState.errors.username?.message} id="login" placeholder="Придумай логин" type="text" {...register("username", { required: "Введи логин!" })} />
+            <Field error={formState.errors.password?.message} id="password" placeholder="Придумай пароль" type="password" {...register("password", { required: "Пароль введи!", minLength: {value: 4, message: 'Пароль не менее 4 символов!'} })} />
+            <Field error={formState.errors.firstName?.message} id="name" placeholder="Имя" type="text" {...register("firstName", { required: "У тебя че имени нет!?" })} />
+            <Field error={formState.errors.lastName?.message} id="lastname" placeholder="Фамилия" type="text" {...register("lastName", { required: "Ты че детдомовский?!" })} />
             <Field id="middlename" placeholder="Отчество (если есть)" type="text" {...register("middleName")} />
             
             {role.role === "student" && (
@@ -83,3 +86,4 @@ export function RegistrationPage() {
 
   return <h1 className="text-3xl font-semibold min-h-screen flex flex-col justify-center items-center">Попробуй <span className="text-accent">позже</span></h1>;
 }
+
