@@ -1,6 +1,5 @@
 import { Field } from "../../components/ui/Field";
 import { useBackButton } from "../../hooks/useBackButton";
-import { useMainButton } from "../../hooks/useMainButton";
 import { useClasses } from "../../hooks/useClasses";
 import { Loading } from "../../components/Loading";
 import WebApp from "@twa-dev/sdk";
