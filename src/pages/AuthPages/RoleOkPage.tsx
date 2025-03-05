@@ -1,10 +1,10 @@
 import { useNavigate, useParams } from "react-router";
 import { useBackButton } from "../../hooks/useBackButton";
-import { useMainButton } from "../../hooks/useMainButton";
 import { useAtom } from "jotai";
 import { IRoles } from "../../types/roles.types";
 import { roleAtom } from "../../store";
 import { useEffect } from "react";
+import { MyMainButton } from "../../components/MyMainButton";
 
 export function RoleOkPage() {
   const { role } = useParams<{ role: IRoles['role'] }>();
@@ -17,7 +17,6 @@ export function RoleOkPage() {
     }
   }, [role, setRole]);
 
-  useMainButton({ text: 'Продолжить',  onClick: () => navigate("/register")});
   useBackButton();
 
   return (
@@ -26,6 +25,7 @@ export function RoleOkPage() {
       <h1 className="font-rubik text-2xl font-semibold text-center">
         <span className="text-accent">Хорошо</span>. Теперь заполни свой профиль.
       </h1>
+      <MyMainButton text="Продолжить" onClick={() => navigate("/register")}/>
     </div>
   );
 }

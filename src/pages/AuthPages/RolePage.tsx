@@ -1,14 +1,11 @@
 import { useNavigate } from "react-router";
 import { useBackButton } from "../../hooks/useBackButton";
-import { useMainButton } from "../../hooks/useMainButton";
-import { useSecondaryButton } from "../../hooks/useSecondaryButton";
+import { MyMainButton } from "../../components/MyMainButton";
+import { MySecondaryButton } from "../../components/MySecondaryButton";
 
 export function RolePage() {
   const navigate = useNavigate()
   useBackButton()
-
-  useMainButton({text: 'Ученик', onClick: () => navigate("/register/role/student")})
-  useSecondaryButton({text: 'Учитель', onClick: () => navigate("/register/role/teacher")})
 
   return (
     <div className="flex flex-col space-y-8 h-screen justify-center items-center bg-black-main">
@@ -19,6 +16,8 @@ export function RolePage() {
       <h1 className="font-rubik text-2xl font-semibold text-center">
         <span className="text-accent">Отлично</span>! Теперь выбери кто ты.
       </h1>
+        <MyMainButton text="Ученик" onClick={() => navigate("/register/role/student")}/>
+        <MySecondaryButton text="Учитель" onClick={() => navigate("/register/role/teacher")}/>
     </div>
   )
 }

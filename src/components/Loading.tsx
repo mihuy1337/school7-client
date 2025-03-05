@@ -1,3 +1,5 @@
+import { Colors } from "../config/colors";
+import { MyMainButton } from "./MyMainButton";
 
 export function Loading() {
   return (
@@ -6,6 +8,7 @@ export function Loading() {
       <h1 className="font-rubik text-2xl font-semibold text-center">
         <span className="text-accent">Подожди</span>! Идет загрузка...
       </h1>
+      <MyMainButton progress={true} text="Идет загрузка..." disabled={true} color={Colors.black.secondary} textColor={Colors.accent}/>
     </div>
   )
 }
