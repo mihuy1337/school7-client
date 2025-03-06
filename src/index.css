@@ -27,5 +27,5 @@
 }
 
 body {
-  @apply font-rubik bg-black-main text-white-main px-4 pb-safe-tg-bottom select-none
+  @apply font-rubik bg-black-main text-white-main px-4 pb-safe-tg-bottom pt-safe-device-top select-none
 }
