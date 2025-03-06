@@ -21,10 +21,11 @@
 
   --font-rubik: "Rubik", sans-serif;
 
-  --spacing-safe-top: var(--tg-content-safe-area-inset-top);
-  --spacing-safe-bottom: var(--tg-content-safe-area-inset-bottom)
+  --spacing-safe-device-top: var(--tg-safe-area-inset-top);
+  --spacing-safe-tg-top: var(--tg-content-safe-area-inset-top);
+  --spacing-safe-tg-bottom: var(--tg-content-safe-area-inset-bottom)
 }
 
 body {
-  @apply font-rubik bg-black-main text-white-main px-4 pb-safe-bottom select-none
+  @apply font-rubik bg-black-main text-white-main px-4 pb-safe-tg-bottom select-none
 }

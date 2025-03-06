@@ -36,7 +36,7 @@ export function LoginPage() {
   const isFormComplete = !!(watchFields[0] && watchFields[1]);
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center pt-safe-top">
+    <div className="min-h-screen flex flex-col justify-center items-center pt-safe-tg-top">
       <div className="w-full">
         <h1 className="text-3xl font-semibold">Вход</h1>
         <form className="space-y-4 mt-6">
