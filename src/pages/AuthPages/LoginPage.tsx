@@ -37,29 +37,26 @@ export function LoginPage() {
   const isFormComplete = !!(watchFields[0] && watchFields[1]);
 
   return (
-    <div>
+    <div className="h-screen flex flex-col bg-black-main">
       <Header>Вход</Header>
-      <div className="min-h-screen flex flex-col justify-center items-center pt-safe-tg-top">
-        <div className="w-full">
-          <h1 className="text-3xl font-semibold">Вход</h1>
-          <form className="space-y-4 mt-6">
-            <Field
-              error={formState.errors.username?.message}
-              id="login"
-              placeholder="Юзернейм"
-              type="text"
-              {...register("username", { required: "Введи юзернейм!" })}
-            />
-            <Field
-              error={formState.errors.password?.message}
-              id="password"
-              placeholder="Пароль"
-              type="password"
-              {...register("password", { required: "Введи пароль!" })}
-            />
-          </form>
-        </div>
-
+      <div className="flex flex-col flex-1 justify-center w-full space-y-8">
+        <h1 className="text-3xl font-semibold">Вход</h1>
+        <form className="w-full space-y-4">
+          <Field
+            error={formState.errors.username?.message}
+            id="login"
+            placeholder="Юзернейм"
+            type="text"
+            {...register("username", { required: "Введи юзернейм!" })}
+          />
+          <Field
+            error={formState.errors.password?.message}
+            id="password"
+            placeholder="Пароль"
+            type="password"
+            {...register("password", { required: "Введи пароль!" })}
+          />
+        </form>
         <MyMainButton
           text={isPending ? "Отправка формы..." : !isFormComplete ? "Введи все нужные данные!" : "Войти"}
           textColor={!isFormComplete || isPending ? Colors.accent : Colors.black.main}
@@ -72,4 +69,5 @@ export function LoginPage() {
     </div>
   );
 }
+
 

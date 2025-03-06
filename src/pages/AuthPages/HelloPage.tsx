@@ -8,15 +8,15 @@ export function HelloPage() {
   const navigate = useNavigate()
 
   return (
-    <div>
+    <div className="h-screen flex flex-col bg-black-main">
       <Header>Привет!</Header>
-      <div className="flex flex-col space-y-8 h-screen justify-center items-center bg-black-main">
-        <img className="h-auto max-w-full" src='/pic3.svg'/>
+      <div className="flex flex-col flex-1 justify-center items-center space-y-8">
+        <img className="h-auto max-w-full" src='/pic3.svg' />
         <h1 className="font-rubik text-2xl font-semibold text-center">
           Привет, <span className="text-accent">{WebApp.initDataUnsafe.user?.first_name}</span>. Ты зарегистрирован(а)?
         </h1>
-        <MyMainButton text="Да" onClick={() => navigate("/login")}/>
-        <MySecondaryButton text="Нет" onClick={() => navigate("/register/role")}/>
+        <MyMainButton text="Да" onClick={() => navigate("/login")} />
+        <MySecondaryButton text="Нет" onClick={() => navigate("/register/role")} />
       </div>
     </div>
   )

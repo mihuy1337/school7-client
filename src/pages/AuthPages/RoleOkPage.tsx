@@ -21,14 +21,14 @@ export function RoleOkPage() {
   useBackButton();
 
   return (
-    <div>
+    <div className="h-screen flex flex-col bg-black-main">
       <Header>Отлично!</Header>
-      <div className="flex flex-col space-y-8 h-screen justify-center items-center bg-black-main">
+      <div className="flex flex-col flex-1 justify-center items-center space-y-8">
         <img className="h-auto max-w-full" src={role === 'teacher' ? '/pic1.svg' : '/pic2.svg'} alt="Role illustration" />
         <h1 className="font-rubik text-2xl font-semibold text-center">
           <span className="text-accent">Хорошо</span>. Теперь заполни свой профиль.
         </h1>
-        <MyMainButton text="Продолжить" onClick={() => navigate("/register")}/>
+        <MyMainButton text="Продолжить" onClick={() => navigate("/register")} />
       </div>
     </div>
   );
