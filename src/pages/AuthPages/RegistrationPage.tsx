@@ -15,7 +15,7 @@ import { Colors } from "../../config/colors";
 
 export function RegistrationPage() {
   const { data, isLoading, isSuccess } = useClasses();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  // const [isSubmitting, setIsSubmitting] = useState(false);
   const role = useAtomValue(roleAtom);
 
   useBackButton();
@@ -24,17 +24,17 @@ export function RegistrationPage() {
     mode: "onChange",
   });
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationKey: ["auth"],
     mutationFn: (data: IRegisterForm) => authService.register(data),
     onSuccess() {
-      setIsSubmitting(false);
+      // setIsSubmitting(false);
       WebApp.showAlert("Ты зарегистрирован, остальное в процессе...");
       reset();
     },
     onError() {
-      setIsSubmitting(false);
-      WebApp.showAlert("Какая-то ошибка...");
+      // setIsSubmitting(false);
+      WebApp.showAlert("Пользователь с таким юзернеймом уже существует!");
     },
   });
 
@@ -43,7 +43,6 @@ export function RegistrationPage() {
   const isFormComplete = !!(watchFields[0] && watchFields[1] && watchFields[2] && watchFields[3]);
 
   const onSubmit: SubmitHandler<IRegisterForm> = (formData) => {
-    setIsSubmitting(true);
     WebApp.MainButton.showProgress(); // показываем лоадер
 
     mutate({
@@ -53,13 +52,6 @@ export function RegistrationPage() {
   };
 
   if (isLoading) {
-    WebApp.MainButton.show()
-    WebApp.MainButton.showProgress();
-    WebApp.MainButton.setParams({
-      text: "Идет загрузка...",
-      color: Colors.black.secondary,
-      text_color: Colors.accent,
-    })
     return <Loading />;
   }
 
@@ -71,7 +63,7 @@ export function RegistrationPage() {
         <div className="w-full">
           <h1 className="text-3xl font-semibold">Регистрация</h1>
           <form className="space-y-4 mt-6">
-            <Field error={formState.errors.username?.message} id="login" placeholder="Придумай логин" type="text" {...register("username", { required: "Введи логин!" })} />
+            <Field error={formState.errors.username?.message} id="username" placeholder="Придумай юзернейм" type="text" {...register("username", { required: "Введи юзернейм!" })} />
             <Field error={formState.errors.password?.message} id="password" placeholder="Придумай пароль" type="password" {...register("password", { required: "Пароль введи!", minLength: { value: 6, message: "Пароль не менее 6 символов!" } })} />
             <Field error={formState.errors.firstName?.message} id="name" placeholder="Имя" type="text" {...register("firstName", { required: "У тебя че имени нет!?" })} />
             <Field error={formState.errors.lastName?.message} id="lastname" placeholder="Фамилия" type="text" {...register("lastName", { required: "Ты че детдомовский?!" })} />
@@ -94,11 +86,11 @@ export function RegistrationPage() {
         </div>
 
         <MyMainButton 
-          text={isSubmitting ? "Отправка формы..." : !isFormComplete ? "Введи все нужные данные!" : "Зарегистрироваться"} 
-          textColor={isSubmitting || !isFormComplete ? Colors.accent : Colors.black.main}
-          color={isSubmitting || !isFormComplete ? Colors.black.secondary : Colors.accent}
+          text={isPending ? "Отправка формы..." : !isFormComplete ? "Введи все нужные данные!" : "Зарегистрироваться"} 
+          textColor={isPending || !isFormComplete ? Colors.accent : Colors.black.main}
+          color={isPending || !isFormComplete ? Colors.black.secondary : Colors.accent}
           disabled={!isFormComplete}
-          progress={isSubmitting}
+          progress={isPending}
           onClick={() => handleSubmit(onSubmit)()}
         />
       </div>

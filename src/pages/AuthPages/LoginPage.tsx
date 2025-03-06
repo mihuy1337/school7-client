@@ -14,7 +14,7 @@ export function LoginPage() {
     mode: "onChange",
   });
 
-  const { mutate,  } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationKey: ["auth"],
     mutationFn: (data: ILoginForm) => authService.login(data),
     onSuccess() {
@@ -22,7 +22,7 @@ export function LoginPage() {
       reset();
     },
     onError() {
-      WebApp.showAlert("Какая-то ошибка...");
+      WebApp.showAlert("Проверь пароль и юзернейм!");
       reset();
     },
   });
@@ -43,9 +43,9 @@ export function LoginPage() {
           <Field
             error={formState.errors.username?.message}
             id="login"
-            placeholder="Логин"
+            placeholder="Юзернейм"
             type="text"
-            {...register("username", { required: "Введи логин!" })}
+            {...register("username", { required: "Введи юзернейм!" })}
           />
           <Field
             error={formState.errors.password?.message}
@@ -58,10 +58,11 @@ export function LoginPage() {
       </div>
 
       <MyMainButton
-        text={!isFormComplete ? "Введи все нужные данные!" : "Войти"}
-        textColor={!isFormComplete ? Colors.accent : Colors.black.main}
-        color={!isFormComplete ? Colors.black.secondary : Colors.accent}
-        disabled={!isFormComplete}
+        text={isPending ? "Отправка формы..." : !isFormComplete ? "Введи все нужные данные!" : "Войти"}
+        textColor={!isFormComplete || isPending ? Colors.accent : Colors.black.main}
+        color={!isFormComplete || isPending ? Colors.black.secondary : Colors.accent}
+        disabled={!isFormComplete || isPending}
+        progress={isPending}
         onClick={() => handleSubmit(onSubmit)()}
       />
     </div>
