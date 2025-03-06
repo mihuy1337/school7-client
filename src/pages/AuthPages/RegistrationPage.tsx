@@ -10,7 +10,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { authService } from "../../services/auth.service";
 import { useMutation } from "@tanstack/react-query";
 import { MyMainButton } from "../../components/MyMainButton";
-import { useState } from "react";
 import { Colors } from "../../config/colors";
 
 export function RegistrationPage() {
