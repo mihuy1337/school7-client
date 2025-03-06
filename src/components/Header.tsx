@@ -6,7 +6,7 @@ interface Props {
 
 export function Header({children}: Props) {
   return (
-    <header className="flex justify-center items-center min-h-[--tg-content-safe-area-inset-top]">
+    <header className="flex justify-center items-center min-h-safe-top">
       <div className="text-center w-full">
         <div>
           {children}
