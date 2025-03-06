@@ -11,6 +11,7 @@ import { authService } from "../../services/auth.service";
 import { useMutation } from "@tanstack/react-query";
 import { MyMainButton } from "../../components/MyMainButton";
 import { Colors } from "../../config/colors";
+import { Header } from "../../components/Header";
 
 export function RegistrationPage() {
   const { data, isLoading, isSuccess } = useClasses();
@@ -58,40 +59,43 @@ export function RegistrationPage() {
     WebApp.MainButton.hideProgress();
 
     return (
-      <div className="min-h-screen flex flex-col justify-center items-center pt-safe-top">
-        <div className="w-full">
-          <h1 className="text-3xl font-semibold">Регистрация</h1>
-          <form className="space-y-4 mt-6">
-            <Field error={formState.errors.username?.message} id="username" placeholder="Придумай юзернейм" type="text" {...register("username", { required: "Введи юзернейм!" })} />
-            <Field error={formState.errors.password?.message} id="password" placeholder="Придумай пароль" type="password" {...register("password", { required: "Пароль введи!", minLength: { value: 6, message: "Пароль не менее 6 символов!" } })} />
-            <Field error={formState.errors.firstName?.message} id="name" placeholder="Имя" type="text" {...register("firstName", { required: "У тебя че имени нет!?" })} />
-            <Field error={formState.errors.lastName?.message} id="lastname" placeholder="Фамилия" type="text" {...register("lastName", { required: "Ты че детдомовский?!" })} />
-            <Field id="middlename" placeholder="Отчество (если есть)" type="text" {...register("middleName")} />
+      <div>
+        <Header>Регистрация</Header>
+        <div className="min-h-screen flex flex-col justify-center items-center pt-safe-top">
+          <div className="w-full">
+            <h1 className="text-3xl font-semibold">Регистрация</h1>
+            <form className="space-y-4 mt-6">
+              <Field error={formState.errors.username?.message} id="username" placeholder="Придумай юзернейм" type="text" {...register("username", { required: "Введи юзернейм!" })} />
+              <Field error={formState.errors.password?.message} id="password" placeholder="Придумай пароль" type="password" {...register("password", { required: "Пароль введи!", minLength: { value: 6, message: "Пароль не менее 6 символов!" } })} />
+              <Field error={formState.errors.firstName?.message} id="name" placeholder="Имя" type="text" {...register("firstName", { required: "У тебя че имени нет!?" })} />
+              <Field error={formState.errors.lastName?.message} id="lastname" placeholder="Фамилия" type="text" {...register("lastName", { required: "Ты че детдомовский?!" })} />
+              <Field id="middlename" placeholder="Отчество (если есть)" type="text" {...register("middleName")} />
 
-            {role.role === "student" && (
-              <select
-                id="role"
-                {...register("classId", { required: "Выбери класс!" })}
-                className="appearance-none focus:outline-none border-2 border-transparent focus:border-accent focus:ring-accent transition-all duration-300 p-4 w-full bg-black-secondary text-hint font-medium text-white-main text-base rounded-xl"
-              >
-                {data.map((c) => (
-                  <option key={c.id} value={c.id} className="text-white-main p-4">
-                    {c.className}
-                  </option>
-                ))}
-              </select>
-            )}
-          </form>
+              {role.role === "student" && (
+                <select
+                  id="role"
+                  {...register("classId", { required: "Выбери класс!" })}
+                  className="appearance-none focus:outline-none border-2 border-transparent focus:border-accent focus:ring-accent transition-all duration-300 p-4 w-full bg-black-secondary text-hint font-medium text-white-main text-base rounded-xl"
+                >
+                  {data.map((c) => (
+                    <option key={c.id} value={c.id} className="text-white-main p-4">
+                      {c.className}
+                    </option>
+                  ))}
+                </select>
+              )}
+            </form>
+          </div>
+
+          <MyMainButton 
+            text={isPending ? "Отправка формы..." : !isFormComplete ? "Введи все нужные данные!" : "Зарегистрироваться"} 
+            textColor={isPending || !isFormComplete ? Colors.accent : Colors.black.main}
+            color={isPending || !isFormComplete ? Colors.black.secondary : Colors.accent}
+            disabled={!isFormComplete}
+            progress={isPending}
+            onClick={() => handleSubmit(onSubmit)()}
+          />
         </div>
-
-        <MyMainButton 
-          text={isPending ? "Отправка формы..." : !isFormComplete ? "Введи все нужные данные!" : "Зарегистрироваться"} 
-          textColor={isPending || !isFormComplete ? Colors.accent : Colors.black.main}
-          color={isPending || !isFormComplete ? Colors.black.secondary : Colors.accent}
-          disabled={!isFormComplete}
-          progress={isPending}
-          onClick={() => handleSubmit(onSubmit)()}
-        />
       </div>
     );
   }

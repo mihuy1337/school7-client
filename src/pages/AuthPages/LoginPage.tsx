@@ -7,6 +7,7 @@ import { authService } from "../../services/auth.service";
 import { ILoginForm } from "../../types/auth.types";
 import { MyMainButton } from "../../components/MyMainButton";
 import { Colors } from "../../config/colors";
+import { Header } from "../../components/Header";
 
 export function LoginPage() {
   useBackButton();
@@ -36,35 +37,38 @@ export function LoginPage() {
   const isFormComplete = !!(watchFields[0] && watchFields[1]);
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center pt-safe-tg-top">
-      <div className="w-full">
-        <h1 className="text-3xl font-semibold">Вход</h1>
-        <form className="space-y-4 mt-6">
-          <Field
-            error={formState.errors.username?.message}
-            id="login"
-            placeholder="Юзернейм"
-            type="text"
-            {...register("username", { required: "Введи юзернейм!" })}
-          />
-          <Field
-            error={formState.errors.password?.message}
-            id="password"
-            placeholder="Пароль"
-            type="password"
-            {...register("password", { required: "Введи пароль!" })}
-          />
-        </form>
-      </div>
+    <div>
+      <Header>Вход</Header>
+      <div className="min-h-screen flex flex-col justify-center items-center pt-safe-tg-top">
+        <div className="w-full">
+          <h1 className="text-3xl font-semibold">Вход</h1>
+          <form className="space-y-4 mt-6">
+            <Field
+              error={formState.errors.username?.message}
+              id="login"
+              placeholder="Юзернейм"
+              type="text"
+              {...register("username", { required: "Введи юзернейм!" })}
+            />
+            <Field
+              error={formState.errors.password?.message}
+              id="password"
+              placeholder="Пароль"
+              type="password"
+              {...register("password", { required: "Введи пароль!" })}
+            />
+          </form>
+        </div>
 
-      <MyMainButton
-        text={isPending ? "Отправка формы..." : !isFormComplete ? "Введи все нужные данные!" : "Войти"}
-        textColor={!isFormComplete || isPending ? Colors.accent : Colors.black.main}
-        color={!isFormComplete || isPending ? Colors.black.secondary : Colors.accent}
-        disabled={!isFormComplete || isPending}
-        progress={isPending}
-        onClick={() => handleSubmit(onSubmit)()}
-      />
+        <MyMainButton
+          text={isPending ? "Отправка формы..." : !isFormComplete ? "Введи все нужные данные!" : "Войти"}
+          textColor={!isFormComplete || isPending ? Colors.accent : Colors.black.main}
+          color={!isFormComplete || isPending ? Colors.black.secondary : Colors.accent}
+          disabled={!isFormComplete || isPending}
+          progress={isPending}
+          onClick={() => handleSubmit(onSubmit)()}
+        />
+      </div>
     </div>
   );
 }

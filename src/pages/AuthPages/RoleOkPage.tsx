@@ -5,6 +5,7 @@ import { IRoles } from "../../types/roles.types";
 import { roleAtom } from "../../store";
 import { useEffect } from "react";
 import { MyMainButton } from "../../components/MyMainButton";
+import { Header } from "../../components/Header";
 
 export function RoleOkPage() {
   const { role } = useParams<{ role: IRoles['role'] }>();
@@ -20,12 +21,15 @@ export function RoleOkPage() {
   useBackButton();
 
   return (
-    <div className="flex flex-col space-y-8 h-screen justify-center items-center bg-black-main">
-      <img className="h-auto max-w-full" src={role === 'teacher' ? '/pic1.svg' : '/pic2.svg'} alt="Role illustration" />
-      <h1 className="font-rubik text-2xl font-semibold text-center">
-        <span className="text-accent">Хорошо</span>. Теперь заполни свой профиль.
-      </h1>
-      <MyMainButton text="Продолжить" onClick={() => navigate("/register")}/>
+    <div>
+      <Header>Отлично!</Header>
+      <div className="flex flex-col space-y-8 h-screen justify-center items-center bg-black-main">
+        <img className="h-auto max-w-full" src={role === 'teacher' ? '/pic1.svg' : '/pic2.svg'} alt="Role illustration" />
+        <h1 className="font-rubik text-2xl font-semibold text-center">
+          <span className="text-accent">Хорошо</span>. Теперь заполни свой профиль.
+        </h1>
+        <MyMainButton text="Продолжить" onClick={() => navigate("/register")}/>
+      </div>
     </div>
   );
 }
