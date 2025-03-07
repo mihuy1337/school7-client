@@ -28,8 +28,11 @@ export const authService = {
 
 	async getNewTokens() {
 		const response = await axiosClassic.post<IAuthResponse>(
-			'/auth/login/access-token'
+			'/auth/access-token',
+			{},
+    	{ withCredentials: true }
 		)
+		
 
 		if (response.data.accessToken) saveTokenStorage(response.data.accessToken)
 
