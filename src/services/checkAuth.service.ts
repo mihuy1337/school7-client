@@ -1,7 +1,8 @@
-import { axiosWithAuth } from "../api/interceptors"
+import { axiosClassic, axiosWithAuth } from "../api/interceptors"
+import { EnumTokens, getToken } from "./auth-token.service"
 
 interface isRefresh {
-  isRefresh: boolean
+  isValid: boolean
 }
 
 interface isAcivate {
@@ -10,8 +11,11 @@ interface isAcivate {
 
 export const checkAuthService = {
   async checkRefresh() {
-    const res = await axiosWithAuth.get<isRefresh>('/auth/check-refresh')
-    return res.data.isRefresh
+    const refreshToken = await getToken(EnumTokens.REFRESH_TOKEN)
+    const res = await axiosClassic.post<isRefresh>('/auth/check-refresh',
+      {refreshToken: refreshToken}
+    )
+    return res.data.isValid
   },
 
   async checkActivate() {

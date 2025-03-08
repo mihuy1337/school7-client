@@ -1,6 +1,6 @@
 import { axiosClassic } from "../api/interceptors"
 import { IAuthResponse, ILoginForm, IRegisterForm } from "../types/auth.types"
-import { saveTokenStorage, removeFromStorage } from "./auth-token.service"
+import { saveTokenStorage, removeFromStorage, EnumTokens } from "./auth-token.service"
 
 
 export const authService = {
@@ -10,7 +10,8 @@ export const authService = {
 			data
 		)
 
-		if (response.data.accessToken) saveTokenStorage(response.data.accessToken)
+		if (response.data.accessToken) saveTokenStorage(EnumTokens.ACCESS_TOKEN, response.data.accessToken)
+		if (response.data.refreshToken) saveTokenStorage(EnumTokens.REFRESH_TOKEN, response.data.accessToken)
 
 		return response
 	},
@@ -21,20 +22,22 @@ export const authService = {
 			data
 		)
 
-		if (response.data.accessToken) saveTokenStorage(response.data.accessToken)
+		if (response.data.accessToken) saveTokenStorage(EnumTokens.ACCESS_TOKEN, response.data.accessToken)
+		if (response.data.refreshToken) saveTokenStorage(EnumTokens.REFRESH_TOKEN, response.data.accessToken)
 
 		return response
 	},
 
-	async getNewTokens() {
+	async getNewTokens(data: {refreshToken: string}) {
 		const response = await axiosClassic.post<IAuthResponse>(
 			'/auth/access-token',
-			{},
+			data,
     	{ withCredentials: true }
 		)
 		
 
-		if (response.data.accessToken) saveTokenStorage(response.data.accessToken)
+		if (response.data.accessToken) saveTokenStorage(EnumTokens.ACCESS_TOKEN, response.data.accessToken)
+		if (response.data.refreshToken) saveTokenStorage(EnumTokens.REFRESH_TOKEN, response.data.accessToken)
 
 		return response
 	},
@@ -42,7 +45,8 @@ export const authService = {
 	async logout() {
 		const response = await axiosClassic.post<boolean>('/auth/logout')
 
-		if (response.data) removeFromStorage()
+		if (response.data) removeFromStorage(EnumTokens.ACCESS_TOKEN)
+		if (response.data) removeFromStorage(EnumTokens.REFRESH_TOKEN)
 
 		return response
 	}

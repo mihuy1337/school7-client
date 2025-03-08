@@ -8,8 +8,10 @@ import { ILoginForm } from "../../types/auth.types";
 import { MyMainButton } from "../../components/MyMainButton";
 import { Colors } from "../../config/colors";
 import { Header } from "../../components/Header";
+import { useNavigate } from "react-router";
 
 export function LoginPage() {
+  const navigate = useNavigate()
   useBackButton();
   const { register, handleSubmit, reset, watch, formState } = useForm<ILoginForm>({
     mode: "onChange",
@@ -19,7 +21,7 @@ export function LoginPage() {
     mutationKey: ["auth"],
     mutationFn: (data: ILoginForm) => authService.login(data),
     onSuccess() {
-      WebApp.showAlert("Ты вошел, остальное в процессе...");
+      navigate('/');
       reset();
     },
     onError() {

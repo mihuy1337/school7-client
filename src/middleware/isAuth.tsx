@@ -1,5 +1,5 @@
 import { useState, useEffect, ReactNode } from "react";
-import { useNavigate } from "react-router"; // Подключаем ваш axios-инстанс
+import { useNavigate } from "react-router";
 import { checkAuthService } from "../services/checkAuth.service";
 import { Loading } from "../components/Loading";
 
@@ -14,7 +14,7 @@ export function IsAuth({ children }: { children: ReactNode }) {
 
         if (!isRefresh) {
           navigate("/hello");
-          return; // Выходим из функции, чтобы `checkActivate` не выполнялся
+          return;
         }
 
         const isActivate = await checkAuthService.checkActivate();
@@ -30,7 +30,7 @@ export function IsAuth({ children }: { children: ReactNode }) {
         }
       } catch (error) {
         console.error("Ошибка проверки refresh-токена:", error);
-        navigate("/login"); // Ошибка проверки -> на страницу логина
+        navigate("/login");
       } finally {
         setIsChecking(false);
       }
@@ -40,7 +40,7 @@ export function IsAuth({ children }: { children: ReactNode }) {
   }, [navigate]);
 
   if (isChecking) {
-    return <Loading />; // Пока проверяем токен, показываем спиннер
+    return <Loading />;
   }
 
   return <>{children}</>;

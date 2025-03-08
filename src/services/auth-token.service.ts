@@ -1,23 +1,35 @@
-import Cookies from 'js-cookie'
+import WebApp from '@twa-dev/sdk'
 
 export enum EnumTokens {
-	'ACCESS_TOKEN' = 'accessToken',
-	'REFRESH_TOKEN' = 'refreshToken'
+  ACCESS_TOKEN = 'accessToken',
+  REFRESH_TOKEN = 'refreshToken'
 }
 
-export const getAccessToken = () => {
-	const accessToken = Cookies.get(EnumTokens.ACCESS_TOKEN)
-	return accessToken || null
+export const getToken = (type: EnumTokens): Promise<string | null> => {
+  return new Promise((resolve, reject) => {
+    WebApp.CloudStorage.getItem(type, (error, value) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(value || null);
+      }
+    });
+  });
 }
 
-export const saveTokenStorage = (accessToken: string) => {
-	Cookies.set(EnumTokens.ACCESS_TOKEN, accessToken, {
-		sameSite: 'lax',
-		secure: true,
-		expires: 1
-	})
+export const saveTokenStorage = (type: EnumTokens, token: string): void => {
+  WebApp.CloudStorage.setItem(type, token);
 }
 
-export const removeFromStorage = () => {
-	Cookies.remove(EnumTokens.ACCESS_TOKEN)
+export const removeFromStorage = (type: EnumTokens): Promise<boolean> => {
+  return new Promise((resolve, reject) => {
+    WebApp.CloudStorage.removeItem(type, (error, success) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(success ?? false);
+      }
+    });
+  });
 }
+

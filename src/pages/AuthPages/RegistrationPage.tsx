@@ -12,8 +12,10 @@ import { useMutation } from "@tanstack/react-query";
 import { MyMainButton } from "../../components/MyMainButton";
 import { Colors } from "../../config/colors";
 import { Header } from "../../components/Header";
+import { useNavigate } from "react-router";
 
 export function RegistrationPage() {
+  const navigate = useNavigate()
   const { data, isLoading, isSuccess } = useClasses();
   // const [isSubmitting, setIsSubmitting] = useState(false);
   const role = useAtomValue(roleAtom);
@@ -29,7 +31,7 @@ export function RegistrationPage() {
     mutationFn: (data: IRegisterForm) => authService.register(data),
     onSuccess() {
       // setIsSubmitting(false);
-      WebApp.showAlert("Ты зарегистрирован, остальное в процессе...");
+      navigate('/')
       reset();
     },
     onError() {

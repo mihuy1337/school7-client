@@ -17,5 +17,6 @@ export interface IRegisterForm {
 
 export interface IAuthResponse {
 	accessToken: string
+  refreshToken: string
 }
 

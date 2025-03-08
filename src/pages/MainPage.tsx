@@ -4,7 +4,7 @@ export function MainPage() {
   return (
     <div>
       <Header>Главная</Header>
-      <div>Это главная страница!</div>
+      <div>Жди докс</div>
     </div>
   )
 }
