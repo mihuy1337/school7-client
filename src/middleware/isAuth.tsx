@@ -17,20 +17,22 @@ export function IsAuth({ children }: { children: ReactNode }) {
           return;
         }
 
-        const isActivate = await checkAuthService.checkActivate();
+        const isActivated = await checkAuthService.checkActivate();
 
-        if (!isActivate) {
+        console.log(isActivated)
+        if (!isActivated) {
+          console.log('Блок активации')
           navigate("/activate");
           return;
         }
 
-        if (isActivate && isRefresh) {
+        if (isActivated && isRefresh) {
           navigate("/");
           return;
         }
       } catch (error) {
         console.error("Ошибка проверки refresh-токена:", error);
-        navigate("/login");
+        navigate("/hello");
       } finally {
         setIsChecking(false);
       }

@@ -6,7 +6,7 @@ interface isRefresh {
 }
 
 interface isAcivate {
-  isAcivate: boolean
+  isActivated: boolean
 }
 
 export const checkAuthService = {
@@ -20,6 +20,7 @@ export const checkAuthService = {
 
   async checkActivate() {
     const res = await axiosWithAuth.get<isAcivate>('/auth/check-activate')
-    return res.data.isAcivate
+    console.log(res)
+    return res.data.isActivated
   }
 }
