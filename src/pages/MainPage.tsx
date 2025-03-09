@@ -9,7 +9,7 @@ export function MainPage() {
     <>
       <Header>Главная</Header>
       <div className="">Жди докс</div>
-      <Popup>Для быстрого доступа установи иконку на рабочий стол.</Popup>
+      <Popup>Для быстрого доступа <span className="text-accent">установи иконку</span> на рабочий стол.</Popup>
       <MyMainButton text="Да, давай" onClick={() => WebApp.addToHomeScreen()}/>
       <MySecondaryButton text="Нет, не хочу"/>
     </>
