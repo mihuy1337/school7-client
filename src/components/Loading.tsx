@@ -4,9 +4,9 @@ import { MyMainButton } from "./MyMainButton";
 
 export function Loading() {
   return (
-    <div>
+    <div className="h-screen flex flex-col bg-black-main">
       <Header>Загрузка</Header>
-      <div className="flex flex-col space-y-8 h-screen justify-center items-center bg-black-main">
+      <div className="flex flex-col flex-1 justify-center items-center space-y-8">
         <img className="h-auto max-w-full" src='/pic4.svg'/>
         <h1 className="h2 text-center">
           <span className="text-accent">Подожди</span>! Идет загрузка...
