@@ -16,7 +16,7 @@ export function RolePage() {
           <img className="h-auto max-w-full" src='/pic1.svg' />
           <img className="h-auto max-w-full" src='/pic2.svg' />
         </div>
-        <h1 className="font-rubik text-2xl font-semibold text-center">
+        <h1 className="h2 text-center">
           <span className="text-accent">Отлично</span>! Теперь выбери кто ты.
         </h1>
         <MyMainButton text="Ученик" onClick={() => navigate("/register/role/student")} />

@@ -12,7 +12,7 @@ export function HelloPage() {
       <Header>Привет!</Header>
       <div className="flex flex-col flex-1 justify-center items-center space-y-8">
         <img className="h-auto max-w-full" src='/pic3.svg' />
-        <h1 className="font-rubik text-2xl font-semibold text-center">
+        <h1 className="h2 text-center">
           Привет, <span className="text-accent">{WebApp.initDataUnsafe.user?.first_name}</span>. Ты зарегистрирован(а)?
         </h1>
         <MyMainButton text="Да" onClick={() => navigate("/login")} />

@@ -25,7 +25,7 @@ export function RoleOkPage() {
       <Header>Отлично!</Header>
       <div className="flex flex-col flex-1 justify-center items-center space-y-8">
         <img className="h-auto max-w-full" src={role === 'teacher' ? '/pic1.svg' : '/pic2.svg'} alt="Role illustration" />
-        <h1 className="font-rubik text-2xl font-semibold text-center">
+        <h1 className="h2 text-center">
           <span className="text-accent">Хорошо</span>. Теперь заполни свой профиль.
         </h1>
         <MyMainButton text="Продолжить" onClick={() => navigate("/register")} />
