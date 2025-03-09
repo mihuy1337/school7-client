@@ -18,6 +18,7 @@ export const getToken = (type: EnumTokens): Promise<string | null> => {
 }
 
 export const saveTokenStorage = (type: EnumTokens, token: string): void => {
+  removeFromStorage(type)
   WebApp.CloudStorage.setItem(type, token);
 }
 

@@ -2,6 +2,14 @@
 @import "tailwindcss";
 
 @theme {
+  --breakpoint-*: initial;
+  --breakpoint-mobile-mini: 300px;
+  --breakpoint-mobile-large: 400px;
+  --breakpoint-tablet-mini: 768px;
+  --breakpoint-tablet-large: 1024px;
+  --breakpoint-pc: 1366px;
+
+
   --color-*: initial;
   --color-black-main: #161616;
   --color-black-secondary: #262626;
@@ -24,6 +32,12 @@
   --spacing-safe-device-top: var(--tg-safe-area-inset-top);
   --spacing-safe-tg-top: var(--tg-content-safe-area-inset-top);
   --spacing-safe-bottom: calc(var(--tg-content-safe-area-inset-bottom) + var(--tg-safe-area-inset-bottom));
+}
+
+@layer components {
+  .h2 {
+    @apply text-xl font-semibold mobile-large:text-2xl
+  }
 }
 
 body {
