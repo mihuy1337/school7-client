@@ -4,7 +4,7 @@
 @theme {
   --breakpoint-*: initial;
   --breakpoint-mobile-mini: 300px;
-  --breakpoint-mobile-large: 400px;
+  --breakpoint-mobile-large: 380px;
   --breakpoint-tablet-mini: 768px;
   --breakpoint-tablet-large: 1024px;
   --breakpoint-pc: 1366px;
