@@ -1,6 +1,6 @@
 import { axiosClassic } from "../api/interceptors"
 import { IAuthResponse, ILoginForm, IRegisterForm } from "../types/auth.types"
-import { saveTokenStorage, removeFromStorage, EnumTokens } from "./auth-token.service"
+import { saveToStorage, removeFromStorage, EnumTokens } from "./storage.service"
 
 
 export const authService = {
@@ -10,8 +10,8 @@ export const authService = {
 			data
 		)
 
-		if (response.data.accessToken) saveTokenStorage(EnumTokens.ACCESS_TOKEN, response.data.accessToken)
-		if (response.data.refreshToken) saveTokenStorage(EnumTokens.REFRESH_TOKEN, response.data.accessToken)
+		if (response.data.accessToken) saveToStorage(EnumTokens.ACCESS_TOKEN, response.data.accessToken)
+		if (response.data.refreshToken) saveToStorage(EnumTokens.REFRESH_TOKEN, response.data.accessToken)
 
 		return response
 	},
@@ -22,8 +22,8 @@ export const authService = {
 			data
 		)
 
-		if (response.data.accessToken) saveTokenStorage(EnumTokens.ACCESS_TOKEN, response.data.accessToken)
-		if (response.data.refreshToken) saveTokenStorage(EnumTokens.REFRESH_TOKEN, response.data.accessToken)
+		if (response.data.accessToken) saveToStorage(EnumTokens.ACCESS_TOKEN, response.data.accessToken)
+		if (response.data.refreshToken) saveToStorage(EnumTokens.REFRESH_TOKEN, response.data.accessToken)
 
 		return response
 	},
@@ -36,8 +36,8 @@ export const authService = {
 		)
 		
 
-		if (response.data.accessToken) saveTokenStorage(EnumTokens.ACCESS_TOKEN, response.data.accessToken)
-		if (response.data.refreshToken) saveTokenStorage(EnumTokens.REFRESH_TOKEN, response.data.accessToken)
+		if (response.data.accessToken) saveToStorage(EnumTokens.ACCESS_TOKEN, response.data.accessToken)
+		if (response.data.refreshToken) saveToStorage(EnumTokens.REFRESH_TOKEN, response.data.accessToken)
 
 		return response
 	},

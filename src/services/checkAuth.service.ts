@@ -1,5 +1,5 @@
 import { axiosClassic, axiosWithAuth } from "../api/interceptors"
-import { EnumTokens, getToken } from "./auth-token.service"
+import { EnumTokens, getItem } from "./storage.service"
 
 interface isRefresh {
   isValid: boolean
@@ -11,7 +11,7 @@ interface isAcivate {
 
 export const checkAuthService = {
   async checkRefresh() {
-    const refreshToken = await getToken(EnumTokens.REFRESH_TOKEN)
+    const refreshToken = await getItem(EnumTokens.REFRESH_TOKEN)
     const res = await axiosClassic.post<isRefresh>('/auth/check-refresh',
       {refreshToken: refreshToken}
     )

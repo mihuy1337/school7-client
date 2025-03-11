@@ -5,9 +5,9 @@ export enum EnumTokens {
   REFRESH_TOKEN = 'refreshToken'
 }
 
-export const getToken = (type: EnumTokens): Promise<string | null> => {
+export const getItem = (key: EnumTokens | string): Promise<string | null> => {
   return new Promise((resolve, reject) => {
-    WebApp.CloudStorage.getItem(type, (error, value) => {
+    WebApp.CloudStorage.getItem(key, (error, value) => {
       if (error) {
         reject(error);
       } else {
@@ -17,14 +17,14 @@ export const getToken = (type: EnumTokens): Promise<string | null> => {
   });
 }
 
-export const saveTokenStorage = (type: EnumTokens, token: string): void => {
-  removeFromStorage(type)
-  WebApp.CloudStorage.setItem(type, token);
+export const saveToStorage = (key: EnumTokens | string, value: string): void => {
+  removeFromStorage(key)
+  WebApp.CloudStorage.setItem(key, value);
 }
 
-export const removeFromStorage = (type: EnumTokens): Promise<boolean> => {
+export const removeFromStorage = (key: EnumTokens | string): Promise<boolean> => {
   return new Promise((resolve, reject) => {
-    WebApp.CloudStorage.removeItem(type, (error, success) => {
+    WebApp.CloudStorage.removeItem(key, (error, success) => {
       if (error) {
         reject(error);
       } else {

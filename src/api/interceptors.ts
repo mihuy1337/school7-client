@@ -1,5 +1,5 @@
 import axios, { type CreateAxiosDefaults } from 'axios'
-import { EnumTokens, getToken, removeFromStorage } from '../services/auth-token.service'
+import { EnumTokens, getItem, removeFromStorage } from '../services/storage.service'
 import { errorCatch } from './error'
 import { authService } from '../services/auth.service'
 
@@ -15,7 +15,7 @@ const axiosClassic = axios.create(options)
 const axiosWithAuth = axios.create(options)
 
 axiosWithAuth.interceptors.request.use(async config => {
-  const accessToken = await getToken(EnumTokens.ACCESS_TOKEN)
+  const accessToken = await getItem(EnumTokens.ACCESS_TOKEN)
 
   if (config?.headers && accessToken)
     config.headers.Authorization = `Bearer ${accessToken}`
@@ -38,7 +38,7 @@ axiosWithAuth.interceptors.response.use(
       originalRequest._isRetry = true
 
       try {
-        const refreshToken = await getToken(EnumTokens.REFRESH_TOKEN)
+        const refreshToken = await getItem(EnumTokens.REFRESH_TOKEN)
 
         if (refreshToken === null) return;
 

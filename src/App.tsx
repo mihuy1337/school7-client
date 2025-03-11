@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useInitApp } from './hooks/useInitApp'
 import { AppRoutes } from './routes'
 import WebApp from '@twa-dev/sdk'
-import { EnumTokens, removeFromStorage } from './services/auth-token.service'
+import { EnumTokens, removeFromStorage } from './services/storage.service'
 
 const queryClient = new QueryClient()
 
