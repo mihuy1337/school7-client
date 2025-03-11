@@ -19,18 +19,18 @@ export function MainPage() {
     <>
       <Header>Главная</Header>
       <Page404 isPage={false} />
-      {isShortcut && (
+      {!isShortcut && (
         <Popup>
           Для быстрого доступа <span className="text-accent">установи иконку</span> на рабочий стол.
         </Popup>
       )}
       <MyMainButton
-        text={isShortcut ? "Да, давай" : "Дневник"}
-        onClick={isShortcut ? () => WebApp.addToHomeScreen() : () => navigate("/404")}
+        text={!isShortcut ? "Да, давай" : "Дневник"}
+        onClick={!isShortcut ? () => WebApp.addToHomeScreen() : () => navigate("/404")}
       />
       <MySecondaryButton
-        text={isShortcut ? "Нет, не хочу" : "Д/З"}
-        onClick={isShortcut ? () => saveToStorage("isMissed", "true") : () => navigate("/404")}
+        text={!isShortcut ? "Нет, не хочу" : "Д/З"}
+        onClick={!isShortcut ? () => saveToStorage("isMissed", "true") : () => navigate("/404")}
       />
     </>
   );
