@@ -7,7 +7,7 @@ interface IShortcut {
 }
 
 export function useShortcut(): IShortcut {
-  const [isShortcut, setIsShortcut] = useState<boolean>(false);
+  const [isShortcut, setIsShortcut] = useState<boolean | null>(null);
 
   useEffect(() => {
     async function checkShortcut() {
@@ -21,5 +21,6 @@ export function useShortcut(): IShortcut {
     checkShortcut();
   }, []);
 
-  return { isShortcut };
+  return { isShortcut: isShortcut ?? false };
 }
+

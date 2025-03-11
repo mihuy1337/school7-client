@@ -7,6 +7,7 @@ import { LoginPage } from "./pages/AuthPages/LoginPage";
 import { MainPage } from "./pages/MainPage";
 import { IsAuth } from "./middleware/isAuth";
 import { ActivatePage } from "./pages/AuthPages/ActivatePage";
+import { Page404 } from "./components/404";
 
 
 export function AppRoutes() {
@@ -19,6 +20,7 @@ export function AppRoutes() {
       <Route path="/register/role" element={<RolePage />} />
       <Route path="/register/role/:role" element={<RoleOkPage />} />
       <Route path="/activate" element={<ActivatePage/>}/>
+      <Route path="/404" element={<Page404 isPage={true}/>}/>
     </Routes>
   );
 }
