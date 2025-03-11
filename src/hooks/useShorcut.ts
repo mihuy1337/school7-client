@@ -8,19 +8,25 @@ interface IShortcut {
 
 export function useShortcut(): IShortcut {
   const [isShortcut, setIsShortcut] = useState<boolean | null>(null);
+  const [isMissed, setIsMissed] = useState<string | null>(null);
 
   useEffect(() => {
-    async function checkShortcut() {
-      const isMissed = await getItem("isMissed");
-
-      WebApp.checkHomeScreenStatus((status) => {
-        setIsShortcut(status === "added" || status === "unsupported" || Boolean(isMissed));
-      });
+    async function fetchMissed() {
+      const missed = await getItem("isMissed");
+      setIsMissed(missed);
     }
-
-    checkShortcut();
+    fetchMissed();
   }, []);
+
+  useEffect(() => {
+    if (isMissed === null) return;
+
+    WebApp.checkHomeScreenStatus((status) => {
+      setIsShortcut(status === "added" || status === "unsupported" || Boolean(isMissed));
+    });
+  }, [isMissed]);
 
   return { isShortcut: isShortcut ?? false };
 }
+
 
