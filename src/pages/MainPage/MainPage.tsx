@@ -3,7 +3,6 @@ import weekday from 'dayjs/plugin/weekday'
 import { Header } from "../../components/Header"
 import { MyMainButton } from "../../components/MyMainButton"
 import { MySecondaryButton } from "../../components/MySecondaryButton"
-import { Page404 } from "../../components/404"
 import { useNavigate } from "react-router"
 import { useSchedule } from "../../hooks/useSchedule"
 
