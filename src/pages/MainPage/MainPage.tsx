@@ -1,4 +1,4 @@
-import * as dayjs from 'dayjs'
+import dayjs from 'dayjs'
 import weekday from 'dayjs/plugin/weekday'
 import { Header } from "../../components/Header"
 import { MyMainButton } from "../../components/MyMainButton"
@@ -11,8 +11,8 @@ export function MainPage() {
   dayjs.extend(weekday)
   const today = dayjs().weekday()
   console.log(today)
-  const scheduleToday = useSchedule({ queryKey: ['schedule', 'today'], day: today });
-  const scheduleTomorrow = useSchedule({ queryKey: ['schedule', 'tomorrow'], day: today + 1 });
+  const scheduleToday = useSchedule({ queryKey: ['schedule', `${today}`], day: today });
+  const scheduleTomorrow = useSchedule({ queryKey: ['schedule', `${today + 1}`], day: today + 1 });
   return (
     <>
       <Header>Главная</Header>

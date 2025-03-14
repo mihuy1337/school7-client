@@ -3,7 +3,7 @@ import { scheduleService } from "../services/schedule.service"
 
 interface IScheduleHook {
   queryKey: string[]
-  day: number
+  day: number | string
 }
 
 export function useSchedule({queryKey, day}: IScheduleHook) {

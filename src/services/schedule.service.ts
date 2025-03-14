@@ -4,7 +4,7 @@ import { ISchedule } from "../types/schedule.types"
 class ScheduleService {
 	private BASE_URL = '/schedule'
 
-	async getScheduleDay(day: number) {
+	async getScheduleDay(day: number | string) {
 		const response = await axiosWithAuth.get<ISchedule>(`${this.BASE_URL}/${day}`)
 		return response.data
 	}
