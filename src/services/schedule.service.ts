@@ -5,7 +5,7 @@ class ScheduleService {
 	private BASE_URL = '/schedule'
 
 	async getScheduleDay(day: number | string) {
-		const response = await axiosWithAuth.get<ISchedule>(`${this.BASE_URL}/${day}`)
+		const response = await axiosWithAuth.get<ISchedule>(`${this.BASE_URL}/app/${day}`)
 		return response.data
 	}
 }
