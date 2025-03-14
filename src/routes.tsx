@@ -4,7 +4,7 @@ import { RolePage } from "./pages/AuthPages/RolePage";
 import { RoleOkPage } from "./pages/AuthPages/RoleOkPage";
 import { RegistrationPage } from "./pages/AuthPages/RegistrationPage";
 import { LoginPage } from "./pages/AuthPages/LoginPage";
-import { MainPage } from "./pages/MainPage";
+import { MainPage } from "./pages/MainPage/MainPage";
 import { IsAuth } from "./middleware/isAuth";
 import { ActivatePage } from "./pages/AuthPages/ActivatePage";
 import { Page404 } from "./components/404";
