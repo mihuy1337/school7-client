@@ -14,16 +14,14 @@ export function Table({data, H1}: TableProps) {
   return (
     <div>
       <h1>{H1}</h1>
-      <table className="bg-black-secondary rounded-lg p-4">
-        <tbody className="font-medium">
-          {data.map((item, index) => (
-            <tr className="pb-4" key={index}>
-              <td>{`${item.number}. ${item.name}`}</td>
-              <td className="text-right">{item.desc}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="p-4 bg-black-secondary rounded-lg w-full">
+        {data.map((item, index) => (
+          <div className="flex justify-between w-full font-medium" key={index}>
+            <div>{`${item.number}. ${item.name}`}</div>
+            <div>{`${item.desc}`}</div>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
