@@ -22,14 +22,17 @@ export const Header = ({ children }: Props) => {
     }
   }, [children]);
   return (
-    <header className="sticky top-safe-device-top w-full flex justify-center items-center min-h-safe-tg-top z-50 bg-transparent"
-      style={{
-        marginTop: "var(--spacing-header-padding)",
-      }}>
-      <div ref={divRef} className="text-center font-medium rounded-[8px] bg-black-secondary text-accent px-3 py-0.5">
-        {children}
-      </div>
-    </header>
+    <>
+      <div className="h-safe-device-top bg-3-main"></div>
+      <header className="sticky top-safe-device-top w-full flex justify-center items-center min-h-safe-tg-top z-50 bg-transparent"
+        style={{
+          marginTop: "var(--spacing-header-padding)",
+        }}>
+        <div ref={divRef} className="text-center font-medium rounded-[8px] bg-black-secondary text-accent px-3 py-0.5">
+          {children}
+        </div>
+      </header>
+    </>
   );
 };
 
