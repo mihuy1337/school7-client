@@ -26,7 +26,7 @@ export const Header = ({ children }: Props) => {
       <div className="h-safe-device-top absolute bg-3-main"></div>
       <header className="sticky bg-2-main top-safe-device-top w-full flex justify-center items-center min-h-safe-tg-top z-40"
         style={{
-          marginTop: "var(--spacing-header-padding)",
+          paddingTop: "var(--spacing-header-padding)",
         }}>
         <div ref={divRef} className="text-center font-medium rounded-[8px] bg-black-secondary text-accent px-3 py-0.5">
           {children}
