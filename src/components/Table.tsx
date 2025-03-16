@@ -18,8 +18,7 @@ export function Table({data, H1}: TableProps) {
         <tbody>
           {data.map((item, index) => (
             <tr key={index}>
-              <td>{item.number}</td>
-              <td>{item.name}</td>
+              <td>`${item.number}. ${item.name}`</td>
               <td>{item.desc}</td>
             </tr>
           ))}
