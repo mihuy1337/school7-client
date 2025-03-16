@@ -15,7 +15,7 @@ export const Header = ({ children }: Props) => {
     if (divRef.current) {
       const divHeight = divRef.current.clientHeight;
       const minHeaderHeight = WebApp.contentSafeAreaInset.top; // Минимальная высота хэдера (например, 64px)
-      const padding = 1 + (minHeaderHeight - divHeight);
+      const padding = (minHeaderHeight - divHeight)/2;
 
       // Записываем в переменную CSS
       document.documentElement.style.setProperty("--spacing-header-padding", `${padding}px`);
