@@ -12,11 +12,11 @@ interface TableProps {
 
 export function Table({data, H1}: TableProps) {
   return (
-    <div>
-      <h1>{H1}</h1>
-      <div className="p-4 bg-black-secondary rounded-lg w-full">
+    <div className="space-y-2">
+      <h1 className="font-medium text-xl">{H1}</h1>
+      <div className="px-4 bg-black-secondary rounded-lg w-full">
         {data.map((item, index) => (
-          <div className="flex justify-between w-full font-medium py-4 border-b-2 border-b-black-hint" key={index}>
+          <div className="flex justify-between w-full font-medium py-4 border-b-2 border-b-black-hint last:border-b-0" key={index}>
             <div>{`${item.number}. ${item.name}`}</div>
             <div>{`${item.desc}`}</div>
           </div>
