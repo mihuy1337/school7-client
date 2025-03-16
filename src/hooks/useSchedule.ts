@@ -1,16 +1,32 @@
 import { useQuery } from "@tanstack/react-query"
 import { scheduleService } from "../services/schedule.service"
+import { RowProps } from "../components/Table"
+import { ISchedule } from "../types/schedule.types"
 
 interface IScheduleHook {
   queryKey: string[]
   day: number | string
 }
 
-export function useSchedule({queryKey, day}: IScheduleHook) {
-  const { data, isLoading, isSuccess } = useQuery({
+export function useSchedule({ queryKey, day }: IScheduleHook) {
+  const { data, isLoading, isSuccess } = useQuery<ISchedule>({
     queryKey,
     queryFn: () => scheduleService.getScheduleDay(day),
-    refetchInterval: 15 * 60 * 1000
+    refetchInterval: 15 * 60 * 1000,
   })
-  return {data, isLoading, isSuccess}
+
+  if (data === undefined) return
+  const className = Object.keys(data)[0]
+
+  let transformedData: RowProps[] = []
+
+  if (isSuccess && data?.[className]?.[String(day)]) {
+    transformedData = data[className][String(day)].map((lesson) => ({
+      number: lesson.number,
+      name: lesson.subject,
+      desc: lesson.classroom === null ? lesson.time : `каб. ${lesson.classroom}, ${lesson.time}`,
+    }))
+  }
+
+  return { data: transformedData, isLoading, isSuccess }
 }
