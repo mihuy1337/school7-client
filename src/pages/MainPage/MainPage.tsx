@@ -9,7 +9,9 @@ export function MainPage() {
   return (
     <>
       <Header>Главная</Header>
-      <ScheduleSection/>
+      <div className="mt-safe-tg-top">
+        <ScheduleSection/>
+      </div>
       <MyMainButton 
         text="Дневник" 
         onClick={() => navigate("/404")}

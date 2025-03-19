@@ -7,8 +7,8 @@ export function ScheduleSection() {
   dayjs.extend(weekday)
   const today = dayjs().weekday()
   console.log(today)
-  const scheduleToday = useSchedule({ queryKey: ['schedule', `${today}`], day: 1 });
-  const scheduleTomorrow = useSchedule({ queryKey: ['schedule', `${today + 1}`], day: 1 + 1 });
+  const scheduleToday = useSchedule({ queryKey: ['schedule', `${today}`], day: today });
+  const scheduleTomorrow = useSchedule({ queryKey: ['schedule', `${today + 1}`], day: today + 1 });
   
   return (
     <div>
