@@ -44,5 +44,5 @@
 }
 
 body {
-  @apply font-rubik bg-black-main text-white-main pb-safe-bottom px-2 select-none
+  @apply font-rubik bg-black-main text-white-main pb-safe-bottom px-4 select-none
 }
