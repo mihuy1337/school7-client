@@ -23,7 +23,7 @@ export const Header = ({ children }: Props) => {
   }, [children]);
   return (
     <>
-      <div className="h-safe-device-top fixed w-full bg-black-main/10 backdrop-blur-sm"></div>
+      <div className="h-safe-device-top fixed w-screen bg-black-main/20 backdrop-blur-sm"></div>
       <header className="sticky bg-transparent top-safe-device-top w-full flex justify-center items-center min-h-safe-tg-top"
         style={{
           paddingTop: "var(--spacing-header-padding)",
