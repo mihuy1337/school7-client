@@ -12,7 +12,7 @@ export function ScheduleSection() {
   
   return (
     <div>
-      <h1>Расписание</h1>
+      <h1 className="h1">Расписание</h1>
       {scheduleToday?.data === undefined ? (
         <p>Упс, здесь ничего нет...</p>
       ) : (
@@ -21,7 +21,7 @@ export function ScheduleSection() {
       {scheduleTomorrow?.data === undefined ? (
         <p>Упс, здесь ничего нет...</p>
       ) : (
-        <Table H1="Сегодня" data={scheduleTomorrow?.data}/>
+        <Table H1="Завтра" data={scheduleTomorrow?.data}/>
       )}
     </div>
   )

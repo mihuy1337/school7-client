@@ -38,6 +38,9 @@
   .h2 {
     @apply text-xl font-semibold mobile-large:text-2xl
   }
+  .h1 {
+    @apply text-2xl font-semibold mobile-large:text-3xl
+  }
 }
 
 body {
