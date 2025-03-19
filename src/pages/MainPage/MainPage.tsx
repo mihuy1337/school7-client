@@ -13,11 +13,11 @@ export function MainPage() {
         <ScheduleSection/>
       </div>
       <MyMainButton 
-        text="Дневник" 
+        text="Оценки" 
         onClick={() => navigate("/404")}
       />
       <MySecondaryButton 
-        text="Д/З"
+        text="Дневник"
         onClick={() => navigate("/404")}
       />
     </>
