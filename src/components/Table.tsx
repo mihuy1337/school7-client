@@ -12,7 +12,7 @@ interface TableProps {
 
 export function Table({data, H1}: TableProps) {
   return (
-    <div className="space-y-2 mx-2">
+    <div className="space-y-2 my-2">
       <h1 className="font-medium text-xl text-black-hint">{H1}</h1>
       <div className="px-4 bg-black-secondary rounded-lg w-full">
         {data.map((item, index) => (
