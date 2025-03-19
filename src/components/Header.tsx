@@ -29,7 +29,7 @@ export const Header = ({ children }: Props) => {
           paddingTop: "var(--spacing-header-padding)",
           paddingBottom: "var(--spacing-header-padding)"
         }}>
-        <div ref={divRef} className="text-center font-medium rounded-[8px] bg-black-secondary text-accent px-3 py-0.5">
+        <div ref={divRef} className="text-center font-medium rounded-[8px] bg-accent/50 text-accent px-3 py-0.5">
           {children}
         </div>
       </header>
