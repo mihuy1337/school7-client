@@ -6,9 +6,10 @@ import { useSchedule } from "../../../hooks/useSchedule";
 export function ScheduleSection() {
   dayjs.extend(weekday)
   const today = dayjs().weekday()
-  console.log(today)
-  const scheduleToday = useSchedule({ queryKey: ['schedule', `${today}`], day: today });
-  const scheduleTomorrow = useSchedule({ queryKey: ['schedule', `${today + 1}`], day: today + 1 });
+  let day = dayjs().weekday()
+  if (Number(day) === 6 || Number(day) === 7) day = 1
+  const scheduleToday = useSchedule({ queryKey: ['schedule', `${day}`], day: day });
+  const scheduleTomorrow = useSchedule({ queryKey: ['schedule', `${day + 1}`], day: day + 1 });
   
   return (
     <div>
@@ -16,12 +17,12 @@ export function ScheduleSection() {
       {scheduleToday?.data === undefined ? (
         <p>Упс, здесь ничего нет...</p>
       ) : (
-        <Table H1="Сегодня" data={scheduleToday?.data}/>
+        <Table H1={today === day ? 'Сегодня' : dayjs().weekday(day).format('dddd, D MMMM')} data={scheduleToday?.data}/>
       )}
       {scheduleTomorrow?.data === undefined ? (
         <p>Упс, здесь ничего нет...</p>
       ) : (
-        <Table H1="Завтра" data={scheduleTomorrow?.data}/>
+        <Table H1={today === day ? 'Завтра' : dayjs().weekday(day + 1).format('dddd, D MMMM')} data={scheduleTomorrow?.data}/>
       )}
     </div>
   )
