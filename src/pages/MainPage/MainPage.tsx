@@ -3,6 +3,7 @@ import { MyMainButton } from "../../components/MyMainButton"
 import { MySecondaryButton } from "../../components/MySecondaryButton"
 import { useNavigate } from "react-router"
 import { ScheduleSection } from "./sections/ScheduleSection"
+import { LastGrades } from "./sections/LastGrades"
 
 export function MainPage() {
   const navigate = useNavigate()
@@ -10,6 +11,7 @@ export function MainPage() {
     <>
       <Header>Главная</Header>
       <div className="mt-safe-tg-top">
+        <LastGrades/>
         <ScheduleSection/>
       </div>
       <MyMainButton 

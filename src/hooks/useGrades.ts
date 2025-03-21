@@ -8,6 +8,11 @@ interface GradeWithFormattedDate extends Grade {
   createdAt: string;
 }
 
+interface GroupedGrades {
+  subject: Subject;
+  grades: GradeWithFormattedDate[];
+}
+
 export function useGrades(lastGrades: number) {
   const { data, isLoading, isSuccess } = useQuery<ReportGrades>({
     queryKey: ['grades'],
@@ -15,20 +20,25 @@ export function useGrades(lastGrades: number) {
     refetchInterval: 60 * 60 * 1000,
   });
 
-  if (data === undefined) return { statistics: null, gradesSubjects: [], latestGrades: [], isLoading, isSuccess };
+  if (data === undefined) {
+    return {
+      isLoading,
+      isSuccess,
+      latestGroupedGrades: [],
+      statistics: null,
+      allGrades: [],
+    };
+  }
 
   const statistics: Statistics = data.statistics;
   const gradesSubjects: SubjectGrades[] = data.subjects;
 
   const allGrades: GradeWithFormattedDate[] = gradesSubjects.flatMap(subject =>
-    subject.grades.map(grade => {
-      const formattedDate = dayjs(grade.createdAt).format('DD.MM');
-      return {
-        ...grade,
-        subject: subject.subject,
-        createdAt: formattedDate,
-      };
-    })
+    subject.grades.map(grade => ({
+      ...grade,
+      subject: subject.subject,
+      createdAt: dayjs(grade.createdAt).format('DD.MM'),
+    }))
   );
 
   const sortedGrades = allGrades.sort((a, b) =>
@@ -37,11 +47,27 @@ export function useGrades(lastGrades: number) {
 
   const latestGrades = sortedGrades.slice(0, lastGrades);
 
+  const groupedGradesMap = latestGrades.reduce((acc, grade) => {
+    const subjectId = grade.subject.id;
+    if (!acc.has(subjectId)) {
+      acc.set(subjectId, {
+        subject: grade.subject,
+        grades: [],
+      });
+    }
+    acc.get(subjectId)!.grades.push(grade);
+    return acc;
+  }, new Map<number, GroupedGrades>());
+
+  const latestGroupedGrades = Array.from(groupedGradesMap.values()).sort((a, b) =>
+    dayjs(b.grades[0].createdAt, 'DD.MM').isAfter(dayjs(a.grades[0].createdAt, 'DD.MM')) ? -1 : 1
+  );
+
   return {
-    statistics,
-    gradesSubjects,
-    latestGrades,
     isLoading,
     isSuccess,
+    latestGroupedGrades,
+    statistics,
+    allGrades: sortedGrades,
   };
 }
