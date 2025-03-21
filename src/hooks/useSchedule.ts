@@ -9,6 +9,7 @@ interface IScheduleHook {
 }
 
 export function useSchedule({ queryKey, day }: IScheduleHook) {
+  if (Number(day) === 6 || Number(day) === 7) day = 1
   const { data, isLoading, isSuccess } = useQuery<ISchedule>({
     queryKey,
     queryFn: () => scheduleService.getScheduleDay(day),
