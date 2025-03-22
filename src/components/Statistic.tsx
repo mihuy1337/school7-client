@@ -17,12 +17,12 @@ export function Statistic({grade, desc, subject, className, picClassName}: Props
         'p-4 rounded-lg relative overflow-hidden border-1', // Цветной контейнер, картинка в нем
         grade !== undefined
           ? grade >= 5
-            ? 'bg-5-main/10 border-5-main/40'
+            ? 'bg-5-main/10 border-5-main/60'
             : grade >= 4
-              ? 'bg-4-main/10 border-4-main/40'
+              ? 'bg-4-main/10 border-4-main/60'
               : grade >= 3
-                ? 'bg-3-main/10 border-3-main/40'
-                : 'bg-2-main/10 border-2-main/40'
+                ? 'bg-3-main/10 border-3-main/60'
+                : 'bg-2-main/10 border-2-main/60'
           : ''
       )}>
         {/* Контент сверху */}
@@ -65,11 +65,11 @@ export function Statistic({grade, desc, subject, className, picClassName}: Props
               picClassName
             )}
             src={
-              grade > 5
+              grade >= 5
                 ? '/pic6.svg'
-                : grade > 4
+                : grade >= 4
                   ? '/pic7.svg'
-                  : grade > 3
+                  : grade >= 3
                     ? '/pic8.svg'
                     : '/pic9.svg'
             }

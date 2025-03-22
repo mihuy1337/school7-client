@@ -10,7 +10,7 @@ export function StatisticsSection() {
       <div className="grid grid-cols-2 gap-3">
         <Statistic grade={statistics?.bestAverageGrade} desc='Лучший ср. балл' subject={statistics?.bestSubject.name}/>
         <Statistic grade={statistics?.worstAverageGrade} desc='Худший ср. балл' subject={statistics?.worstSubject.name}/>
-        <Statistic className="col-span-2" grade={statistics?.globalAverageGrade} desc='Средний балл по всем предметам' subject='Все предметы'/>
+        <Statistic className="col-span-2" picClassName="h-[140%] -bottom-10 right-7 " grade={statistics?.globalAverageGrade} desc='Средний балл по всем предметам' subject='Все предметы'/>
       </div>
     </div>
   )
