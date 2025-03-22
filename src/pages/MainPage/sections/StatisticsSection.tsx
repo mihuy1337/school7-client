@@ -8,9 +8,9 @@ export function StatisticsSection() {
     <div className="space-y-2">
       <h1 className="h1">Статистика</h1>
       <div className="grid grid-cols-2 gap-3">
-        <Statistic grade={statistics?.bestAverageGrade} desc='Лучший ср. балл' subject={statistics?.bestSubject.name}/>
-        <Statistic grade={statistics?.worstAverageGrade} desc='Худший ср. балл' subject={statistics?.worstSubject.name}/>
-        <Statistic className="col-span-2" picClassName="h-[140%] -bottom-10 right-7 " grade={statistics?.globalAverageGrade} desc='Средний балл по всем предметам' subject='Все предметы'/>
+        <Statistic grade={statistics?.bestAverageGrade} badges={['Лучший ср. балл', statistics?.bestSubject.name]}/>
+        <Statistic grade={statistics?.worstAverageGrade} badges={['Худший ср. балл', statistics?.worstSubject.name]}/>
+        <Statistic className="col-span-2" picClassName="h-[140%] -bottom-10 right-7" grade={statistics?.globalAverageGrade} badges={['Ср. балл', 'Все предметы']}/>
       </div>
     </div>
   )

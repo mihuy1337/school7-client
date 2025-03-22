@@ -1,4 +1,5 @@
 import { Grade } from "../../../components/Grade";
+import { Badge } from "../../../components/ui/Badge";
 import { useGrades } from "../../../hooks/useGrades";
 
 export function LastGrades() {
@@ -7,13 +8,15 @@ export function LastGrades() {
     <div>
       <h1 className="h1 mb-2">Последние оценки</h1>
       {isSuccess ? (
-        <div className="flex gap-4 overflow-auto">
+        <div className="grid auto-cols-max grid-flow-col gap-4 overflow-auto">
           {latestGroupedGrades.map((group, index) => (
             <div className="space-y-1" key={index}>
-              <h1 className="text-[14px] font-medium text-black-hint">{group.subject.alias === undefined ||  group.subject.alias === null ? group.subject.name : group.subject.alias}</h1>
+              <Badge className="inline-flex text-[12px]">
+                {group.subject.alias ?? group.subject.name}
+              </Badge>
               <div className="flex gap-2">
                 {group.grades.map((grade, index) => (
-                  <Grade key={index} grade={grade.grade} date={grade.createdAt}/>
+                  <Grade key={index} grade={grade.grade} type={grade.weight.name && grade.weight.alias} date={grade.createdAt}/>
                 ))}
               </div>
             </div>

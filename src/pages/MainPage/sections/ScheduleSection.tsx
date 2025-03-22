@@ -29,7 +29,7 @@ export function ScheduleSection() {
     // Делаем первую букву заглавной
     const dayName = date.format('dddd');
     const capitalizedDayName = dayName.charAt(0).toUpperCase() + dayName.slice(1);
-    return `${capitalizedDayName}, ${date.format('D MMMM')}`;
+    return [capitalizedDayName, date.format('D MMMM')];
   };
 
   return (
@@ -39,7 +39,8 @@ export function ScheduleSection() {
         <p>Упс, здесь ничего нет...</p>
       ) : (
         <Table
-          H1={formatHeader(dayjs().weekday(day), today === day, false)}
+          weekday={formatHeader(dayjs().weekday(day), today === day, false)[0]}
+          date={formatHeader(dayjs().weekday(day), today === day, false)[1]}
           data={scheduleToday?.data}
         />
       )}
@@ -47,7 +48,8 @@ export function ScheduleSection() {
         <p>Упс, здесь ничего нет...</p>
       ) : (
         <Table
-          H1={formatHeader(dayjs().weekday(day + 1), false, today === day)}
+          weekday={formatHeader(dayjs().weekday(day + 1), false, today === day)[0]}
+          date={formatHeader(dayjs().weekday(day + 1), false, today === day)[1]}
           data={scheduleTomorrow?.data}
         />
       )}
