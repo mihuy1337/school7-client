@@ -3,7 +3,6 @@ import { useGrades } from "../../../hooks/useGrades";
 
 export function LastGrades() {
   const { latestGroupedGrades, isSuccess} = useGrades(6)
-  console.log(latestGroupedGrades)
   return (
     <div>
       <h1 className="h1 mb-2">Последние оценки</h1>

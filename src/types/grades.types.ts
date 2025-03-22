@@ -25,7 +25,9 @@ export interface SubjectGrades {
 
 export interface Statistics {
   globalAverageGrade: number;
+  bestSubject: Subject
   bestAverageGrade: number;
+  worstSubject: Subject
   worstAverageGrade: number;
 }
 
