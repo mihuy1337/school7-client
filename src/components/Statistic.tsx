@@ -17,12 +17,12 @@ export function Statistic({grade, desc, subject, className, picClassName}: Props
         'p-4 rounded-lg relative overflow-hidden border-1', // Цветной контейнер, картинка в нем
         grade !== undefined
           ? grade >= 5
-            ? 'bg-5-main/10 border-5-main'
+            ? 'bg-5-main/10 border-5-main/40'
             : grade >= 4
-              ? 'bg-4-main/10 border-4-main'
+              ? 'bg-4-main/10 border-4-main/40'
               : grade >= 3
-                ? 'bg-3-main/10 border-3-main'
-                : 'bg-2-main/10 border-2-main'
+                ? 'bg-3-main/10 border-3-main/40'
+                : 'bg-2-main/10 border-2-main/40'
           : ''
       )}>
         {/* Контент сверху */}
