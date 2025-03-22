@@ -12,8 +12,8 @@ interface TableProps {
 
 export function Table({data, H1}: TableProps) {
   return (
-    <div className="space-y-2 my-2">
-      <h1 className="font-medium text-xl text-black-hint">{H1}</h1>
+    <div className="space-y-2 mb-4">
+      <h1 className="font-medium text-xl text-black-hint text-[14px]">{H1}</h1>
       <div className="bg-black-secondary rounded-lg border-1 border-black-hint w-full">
         {data.map((item, index) => (
           <div className="font-medium text-[14px] max-mobile-large:text-[14px]" key={index}>

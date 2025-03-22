@@ -34,7 +34,7 @@ export function ScheduleSection() {
 
   return (
     <div>
-      <h1 className="h1">Расписание</h1>
+      <h1 className="h1 mb-2">Расписание</h1>
       {scheduleToday?.data === undefined ? (
         <p>Упс, здесь ничего нет...</p>
       ) : (
