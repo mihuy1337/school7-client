@@ -17,7 +17,7 @@ export function Table({data, H1}: TableProps) {
       <div className="bg-black-secondary rounded-lg border-1 border-black-hint w-full">
         {data.map((item, index) => (
           <div className="font-medium text-[14px] max-mobile-large:text-[14px]" key={index}>
-            <div className="p-4 inline-flex justify-between w-full">
+            <div className="py-2.5 px-4 inline-flex justify-between w-full">
               <div className="mr-2">{`${item.number}. ${item.name}`}</div>
               <div>{`${item.desc}`}</div>
             </div>
