@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import { twMerge } from "tailwind-merge"
 import { Badge } from "./ui/Badge";
 
@@ -10,7 +9,6 @@ interface Props {
 }
 
 export function Grade({grade, date, type, className}: Props) {
-  const today = dayjs().format('DD.MM');
   return (
     <div className={twMerge('overflow-hidden p-2 rounded-lg border-1 relative', grade >= 5 ? 'bg-5-main/10 border-5-main/60' : grade >= 4 ? 'bg-4-main/10 border-4-main/60' : grade >= 3 ? 'bg-3-main/10 border-3-main/60' : 'bg-2-main/10 border-2-main/60', className)}>
       <div className="relative z-10">
