@@ -20,7 +20,7 @@ export function useGrades(lastGrades: number) {
     refetchInterval: 60 * 60 * 1000,
   });
 
-  if (data === undefined) {
+  if (!data) {
     return {
       isLoading,
       isSuccess,
@@ -37,12 +37,13 @@ export function useGrades(lastGrades: number) {
     subject.grades.map(grade => ({
       ...grade,
       subject: subject.subject,
-      createdAt: dayjs(grade.createdAt).format('DD.MM'),
+      // оставляем дату как ISO-строку, не форматируем
+      createdAt: grade.createdAt,
     }))
   );
 
   const sortedGrades = allGrades.sort((a, b) =>
-    dayjs(b.createdAt, 'DD.MM').isAfter(dayjs(a.createdAt, 'DD.MM')) ? -1 : 1
+    dayjs(b.createdAt).isAfter(dayjs(a.createdAt)) ? 1 : -1
   );
 
   const latestGrades = sortedGrades.slice(0, lastGrades);
@@ -60,14 +61,28 @@ export function useGrades(lastGrades: number) {
   }, new Map<number, GroupedGrades>());
 
   const latestGroupedGrades = Array.from(groupedGradesMap.values()).sort((a, b) =>
-    dayjs(b.grades[0].createdAt, 'DD.MM').isAfter(dayjs(a.grades[0].createdAt, 'DD.MM')) ? -1 : 1
+    dayjs(b.grades[0].createdAt).isAfter(dayjs(a.grades[0].createdAt)) ? 1 : -1
   );
+
+  // При необходимости форматируй дату здесь или в UI
+  const formattedAllGrades = sortedGrades.map(grade => ({
+    ...grade,
+    createdAt: dayjs(grade.createdAt).format('DD.MM'),
+  }));
+
+  const formattedGroupedGrades = latestGroupedGrades.map(group => ({
+    ...group,
+    grades: group.grades.map(grade => ({
+      ...grade,
+      createdAt: dayjs(grade.createdAt).format('DD.MM'),
+    })),
+  }));
 
   return {
     isLoading,
     isSuccess,
-    latestGroupedGrades,
+    latestGroupedGrades: formattedGroupedGrades,
     statistics,
-    allGrades: sortedGrades,
+    allGrades: formattedAllGrades,
   };
 }
