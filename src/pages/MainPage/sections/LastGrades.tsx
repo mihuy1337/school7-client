@@ -10,7 +10,7 @@ export function LastGrades() {
       {isSuccess ? (
         <div className="flex gap-4 overflow-auto">
           {latestGroupedGrades.map((group, index) => (
-            <div className="space-y-2" key={index}>
+            <div className="space-y-1" key={index}>
               <h1 className="text-[14px] font-medium text-black-hint">{group.subject.alias === undefined ||  group.subject.alias === null ? group.subject.name : group.subject.alias}</h1>
               <div className="flex gap-2">
                 {group.grades.map((grade, index) => (
