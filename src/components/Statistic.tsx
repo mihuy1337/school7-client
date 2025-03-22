@@ -3,7 +3,6 @@ import { Badge } from "./ui/Badge"
 
 interface Props {
   grade: number | undefined
-  subject: string | undefined
   badges: any[]
   className?: string
   picClassName?: string
