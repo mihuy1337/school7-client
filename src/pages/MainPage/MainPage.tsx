@@ -10,7 +10,7 @@ export function MainPage() {
   return (
     <>
       <Header>Главная</Header>
-      <div className="mt-safe-tg-top">
+      <div className="mt-safe-tg-top space-y-4">
         <LastGrades/>
         <ScheduleSection/>
       </div>
