@@ -23,7 +23,7 @@ export function MainPage() {
           </div>
           <MyMainButton 
             text="Оценки" 
-            onClick={() => navigate("/404")}
+            onClick={() => navigate("/grades")}
           />
           <MySecondaryButton 
             text="Дневник"

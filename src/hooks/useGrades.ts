@@ -33,17 +33,18 @@ export function useGrades(lastGrades: number) {
   const statistics: Statistics = data.statistics;
   const gradesSubjects: SubjectGrades[] = data.subjects;
 
+  // Сортируем все оценки по дате (от старой к новой)
   const allGrades: GradeWithFormattedDate[] = gradesSubjects.flatMap(subject =>
     subject.grades.map(grade => ({
       ...grade,
       subject: subject.subject,
-      // оставляем дату как ISO-строку, не форматируем
-      createdAt: grade.createdAt,
+      createdAt: grade.createdAt,  // оставляем дату как ISO-строку
     }))
   );
 
+  // Сортировка оценок по дате (от самой старой к самой новой)
   const sortedGrades = allGrades.sort((a, b) =>
-    dayjs(b.createdAt).isAfter(dayjs(a.createdAt)) ? 1 : -1
+    dayjs(a.createdAt).isBefore(dayjs(b.createdAt)) ? -1 : 1
   );
 
   const latestGrades = sortedGrades.slice(0, lastGrades);
@@ -61,20 +62,15 @@ export function useGrades(lastGrades: number) {
   }, new Map<number, GroupedGrades>());
 
   const latestGroupedGrades = Array.from(groupedGradesMap.values()).sort((a, b) =>
-    dayjs(b.grades[0].createdAt).isAfter(dayjs(a.grades[0].createdAt)) ? 1 : -1
+    dayjs(a.grades[0].createdAt).isBefore(dayjs(b.grades[0].createdAt)) ? -1 : 1
   );
 
-  // При необходимости форматируй дату здесь или в UI
-  const formattedAllGrades = sortedGrades.map(grade => ({
-    ...grade,
-    createdAt: dayjs(grade.createdAt).format('DD.MM'),
-  }));
-
+  // Форматируем сгруппированные оценки (по необходимости)
   const formattedGroupedGrades = latestGroupedGrades.map(group => ({
     ...group,
     grades: group.grades.map(grade => ({
       ...grade,
-      createdAt: dayjs(grade.createdAt).format('DD.MM'),
+      createdAt: dayjs(grade.createdAt).format('DD.MM'),  // форматируем дату
     })),
   }));
 
@@ -83,6 +79,6 @@ export function useGrades(lastGrades: number) {
     isSuccess,
     latestGroupedGrades: formattedGroupedGrades,
     statistics,
-    allGrades: formattedAllGrades,
+    allGrades: sortedGrades,  // Возвращаем отсортированные оценки
   };
 }
