@@ -1,9 +1,12 @@
 import { Statistic } from "../../../components/Statistic";
-import { useGrades } from "../../../hooks/useGrades";
+import { Statistics } from "../../../types/grades.types";
 
-export function StatisticsSection() {
-  const {statistics} = useGrades(6)
-  if (statistics === undefined) return
+interface Props {
+  statistics: Statistics | null
+}
+
+export function StatisticsSection({statistics}: Props) {
+  if (statistics === undefined) return <>Что то не то...</>
   return (
     <div className="space-y-2">
       <h1 className="h1">Статистика</h1>

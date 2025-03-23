@@ -8,7 +8,7 @@ interface GradeWithFormattedDate extends Grade {
   createdAt: string;
 }
 
-interface GroupedGrades {
+export interface GroupedGrades {
   subject: Subject;
   grades: GradeWithFormattedDate[];
 }

@@ -5,25 +5,34 @@ import { useNavigate } from "react-router"
 import { ScheduleSection } from "./sections/ScheduleSection"
 import { LastGrades } from "./sections/LastGrades"
 import { StatisticsSection } from "./sections/StatisticsSection"
+import { useGrades } from "../../hooks/useGrades"
+import { Loading } from "../../components/Loading"
 
 export function MainPage() {
   const navigate = useNavigate()
+  const { latestGroupedGrades, statistics, isLoading } = useGrades(6)
   return (
     <>
-      <Header>Главная</Header>
-      <div className="mt-safe-tg-top space-y-4">
-        <StatisticsSection/>
-        <LastGrades/>
-        <ScheduleSection/>
-      </div>
-      <MyMainButton 
-        text="Оценки" 
-        onClick={() => navigate("/404")}
-      />
-      <MySecondaryButton 
-        text="Дневник"
-        onClick={() => navigate("/404")}
-      />
+      {!isLoading ? (
+        <>
+          <Header>Главная</Header>
+          <div className="mt-safe-tg-top space-y-4">
+            <StatisticsSection statistics={statistics}/>
+            <LastGrades latestGroupedGrades={latestGroupedGrades}/>
+            <ScheduleSection/>
+          </div>
+          <MyMainButton 
+            text="Оценки" 
+            onClick={() => navigate("/404")}
+          />
+          <MySecondaryButton 
+            text="Дневник"
+            onClick={() => navigate("/404")}
+          />
+        </>
+      ) : (
+        <Loading/>
+      )}
     </>
   )
 }

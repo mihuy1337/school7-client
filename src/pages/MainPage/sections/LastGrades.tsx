@@ -1,13 +1,15 @@
 import { Grade } from "../../../components/Grade";
 import { Badge } from "../../../components/ui/Badge";
-import { useGrades } from "../../../hooks/useGrades";
+import { GroupedGrades } from "../../../hooks/useGrades";
 
-export function LastGrades() {
-  const { latestGroupedGrades, isSuccess} = useGrades(6)
+interface Props {
+  latestGroupedGrades: GroupedGrades[]
+}
+
+export function LastGrades({ latestGroupedGrades }: Props) {
   return (
     <div>
       <h1 className="h1 mb-2">Последние оценки</h1>
-      {isSuccess ? (
         <div className="grid auto-cols-max grid-flow-col gap-4 overflow-auto">
           {latestGroupedGrades.map((group, index) => (
             <div className="space-y-1" key={index}>
@@ -22,9 +24,6 @@ export function LastGrades() {
             </div>
           ))}
         </div>
-      ) : (
-        <p>Идет загрузка...</p>
-      )}
     </div>
   )
 }
