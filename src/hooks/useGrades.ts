@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { Grade, ReportGrades, Statistics, SubjectGrades } from "../types/grades.types"
+import { ReportGrades, Statistics, SubjectGrades } from "../types/grades.types"
 import { gradesService } from "../services/grades.service"
 import dayjs from "dayjs";
 import cloneDeep from 'lodash.clonedeep';
@@ -12,7 +12,7 @@ export function useGrades() {
     refetchInterval: 60 * 60 * 1000,
   });
 
-  if (data === undefined) {
+  if (!data) {
     return {
       isLoading,
       isSuccess,
@@ -22,22 +22,26 @@ export function useGrades() {
     };
   }
 
-  const statistics: Statistics = cloneDeep(data.statistics);
+  // Полная глубокая копия всего объекта data
+  const clonedData: ReportGrades = cloneDeep(data);
+  const statistics: Statistics = clonedData.statistics;
   
-  // Полная глубокая копия данных
-  const gradesSubjects: SubjectGrades[] = cloneDeep(data.subjects).map((subject: SubjectGrades) => ({
+  // Работаем с копией subjects
+  const gradesSubjects: SubjectGrades[] = clonedData.subjects.map((subject) => ({
     ...subject,
-    grades: subject.grades.map((grade: Grade) => ({
+    grades: subject.grades.map((grade) => ({
       ...grade,
       createdAt: dayjs(grade.createdAt).format('DD/MM'),
-    })).sort((a: Grade, b: Grade) => dayjs(a.createdAt, 'DD/MM').diff(dayjs(b.createdAt, 'DD/MM'))),
+    })).sort((a, b) => dayjs(a.createdAt, 'DD/MM').diff(dayjs(b.createdAt, 'DD/MM'))),
   }));
 
-  // Глубокая копия gradesSubjects для copyGradesSubjects
-  const copyGradesSubjects: SubjectGrades[] = cloneDeep(gradesSubjects).map((subject: SubjectGrades) => ({
-    ...subject,
-    grades: subject.grades.filter((grade: Grade) => grade.createdAt === today),
-  })).filter((subject: SubjectGrades) => subject.grades.length > 0);
+  // Фильтруем оценки за сегодня
+  const copyGradesSubjects: SubjectGrades[] = gradesSubjects
+    .map((subject) => ({
+      ...subject,
+      grades: subject.grades.filter((grade) => grade.createdAt === today),
+    }))
+    .filter((subject) => subject.grades.length > 0);
 
   return {
     isLoading,
@@ -47,3 +51,4 @@ export function useGrades() {
     sortedGrades: gradesSubjects,
   };
 }
+
