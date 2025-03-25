@@ -22,7 +22,7 @@ export function useGrades() {
     refetchInterval: 60 * 60 * 1000,
   });
 
-  if (!data) {
+  if (data === undefined) {
     return {
       isLoading,
       isSuccess,
@@ -32,31 +32,26 @@ export function useGrades() {
     };
   }
 
-  console.log(data)
-
   const statistics: Statistics = data.statistics;
   const gradesSubjects: SubjectGrades[] = data.subjects;
 
-  for (let i = 0; i < gradesSubjects.length; i++) {
-    let subject = gradesSubjects[i];
-
-    // Сортируем копию массива, чтобы не мутировать оригинал
-    subject.grades = [...subject.grades].sort((a, b) => dayjs(a.createdAt).diff(dayjs(b.createdAt)));
-
-    // Форматируем даты в новом массиве
-    subject.grades = subject.grades.map((grade) => ({
-      ...grade,
-      createdAt: dayjs(grade.createdAt).isValid()
-        ? dayjs(grade.createdAt).format('DD/MM')
-        : 'Некорректная дата',
-    }));
-
-    console.log('Formatted subject:', subject);
+  for (let i = 0; i <= gradesSubjects.length; i++) {
+    let subject = gradesSubjects[i] 
+    subject.grades.sort((a, b) => dayjs(a.createdAt).diff(dayjs(b.createdAt)))
+    console.log(subject)
+    // console.log('========================================================')
+    subject.grades.map((grade) => {
+      const formattedDay = dayjs(grade.createdAt).format('DD/MM');
+      grade.createdAt = formattedDay
+    })
+    // console.log(subject)
   }
 
   return {
     isLoading,
     isSuccess,
+    // newGroupedGrades,
     statistics,
+    // sortedGrades,
   };
 }
