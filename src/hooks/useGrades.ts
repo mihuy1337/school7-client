@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 import { Grade, ReportGrades, Statistics, SubjectGrades } from "../types/grades.types"
 import { gradesService } from "../services/grades.service"
 import dayjs from "dayjs";
+import cloneDeep from 'lodash.clonedeep';
 
 export function useGrades() {
   const today = dayjs().format('DD/MM');
@@ -21,10 +22,10 @@ export function useGrades() {
     };
   }
 
-  const statistics: Statistics = JSON.parse(JSON.stringify(data.statistics));
+  const statistics: Statistics = cloneDeep(data.statistics);
   
   // Полная глубокая копия данных
-  const gradesSubjects: SubjectGrades[] = JSON.parse(JSON.stringify(data.subjects)).map((subject: SubjectGrades) => ({
+  const gradesSubjects: SubjectGrades[] = cloneDeep(data.subjects).map((subject: SubjectGrades) => ({
     ...subject,
     grades: subject.grades.map((grade: Grade) => ({
       ...grade,
@@ -33,7 +34,7 @@ export function useGrades() {
   }));
 
   // Глубокая копия gradesSubjects для copyGradesSubjects
-  const copyGradesSubjects: SubjectGrades[] = JSON.parse(JSON.stringify(gradesSubjects)).map((subject: SubjectGrades) => ({
+  const copyGradesSubjects: SubjectGrades[] = cloneDeep(gradesSubjects).map((subject: SubjectGrades) => ({
     ...subject,
     grades: subject.grades.filter((grade: Grade) => grade.createdAt === today),
   })).filter((subject: SubjectGrades) => subject.grades.length > 0);
