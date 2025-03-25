@@ -13,7 +13,7 @@ export function GradesPage() {
           <Header>Оценки</Header>
           <div className="mt-safe-tg-top">
             {newGrades.map((subject) => (
-              <h1 key={subject.subject.name}></h1>
+              <h1 key={subject.subject.id}>{subject.subject.name}</h1>
             ))}
           </div>
         </>
