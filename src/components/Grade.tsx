@@ -1,5 +1,6 @@
 import { twMerge } from "tailwind-merge"
 import { Badge } from "./ui/Badge";
+import dayjs from "dayjs";
 
 interface Props {
   grade: number,
@@ -24,7 +25,7 @@ export function Grade({grade, date, type, className}: Props) {
                         ? 'text-3-main bg-3-main/15'
                         : 'text-2-main bg-2-main/15'
                   : ''
-            }>{date}</Badge>
+            }>{date === dayjs().format('DD/MM') ? "Сегодня" : date === dayjs().subtract(1, 'day').format('DD/MM') ? 'Вчера' : date}</Badge>
           <Badge className={
               grade !== undefined
                   ? grade >= 5

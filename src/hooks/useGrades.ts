@@ -37,13 +37,10 @@ export function useGrades() {
   for (let i = 0; i < gradesSubjects.length; i++) {
     let subject = gradesSubjects[i] 
     subject.grades.sort((a, b) => dayjs(a.createdAt).diff(dayjs(b.createdAt)))
-    console.log(subject)
-    // console.log('========================================================')
     subject.grades.map((grade) => {
       const formattedDay = dayjs(grade.createdAt).format('DD/MM');
       grade.createdAt = formattedDay
     })
-    // console.log(subject)
   }
 
   let copyGradesSubjects: SubjectGrades[] = JSON.parse(JSON.stringify(gradesSubjects))
@@ -53,10 +50,7 @@ export function useGrades() {
     ...subject,
     grades: subject.grades.filter((grade) => grade.createdAt === today),
   }))
-  .filter((subject) => subject.grades.length > 0); // Удаляем subjects без оценок
-
-
-  console.log(copyGradesSubjects)
+  .filter((subject) => subject.grades.length > 0);
 
   return {
     isLoading,
