@@ -15,27 +15,26 @@ export function useGrades() {
     return {
       isLoading,
       isSuccess,
-      sortedGrades: [],
+      latestGroupedGrades: [],
       statistics: null,
       newGrades: [],
     };
   }
 
   const statistics: Statistics = data.statistics;
+  
   const gradesSubjects: SubjectGrades[] = data.subjects.map((subject) => ({
     ...subject,
-    grades: [...subject.grades].sort((a, b) => dayjs(a.createdAt).diff(dayjs(b.createdAt))).map((grade) => ({
+    grades: subject.grades.map((grade) => ({
       ...grade,
       createdAt: dayjs(grade.createdAt).format('DD/MM'),
-    })),
+    })).sort((a, b) => dayjs(a.createdAt, 'DD/MM').diff(dayjs(b.createdAt, 'DD/MM'))),
   }));
 
-  const copyGradesSubjects: SubjectGrades[] = gradesSubjects
-    .map((subject) => ({
-      ...subject,
-      grades: subject.grades.filter((grade) => grade.createdAt === today),
-    }))
-    .filter((subject) => subject.grades.length > 0);
+  const copyGradesSubjects: SubjectGrades[] = gradesSubjects.map((subject) => ({
+    ...subject,
+    grades: subject.grades.filter((grade) => grade.createdAt === today).map((grade) => ({ ...grade })),
+  })).filter((subject) => subject.grades.length > 0);
 
   return {
     isLoading,
