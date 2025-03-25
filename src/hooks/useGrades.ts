@@ -27,7 +27,7 @@ export function useGrades() {
       isSuccess,
       latestGroupedGrades: [],
       statistics: null,
-      allGrades: [],
+      newGrades: [],
     };
   }
 

@@ -5,17 +5,16 @@ import { useGrades } from "../../hooks/useGrades";
 
 export function GradesPage() {
   useBackButton()
-  const {allGrades, isLoading} = useGrades()
-  console.log(allGrades)
+  const {newGrades, isLoading} = useGrades()
   return (
     <>
-      {!isLoading? (
+      {!isLoading ? (
         <>
           <Header>Оценки</Header>
           <div className="mt-safe-tg-top">
-            {/* {allGrades.map((subjects) => (
-              <h1 key={subjects.subject.id}>{subjects.subject.name} {subjects.subject.id}</h1>
-            ))} */}
+            {newGrades.map((subject) => (
+              <h1 key={subject.subject.name}></h1>
+            ))}
           </div>
         </>
       ) : (
