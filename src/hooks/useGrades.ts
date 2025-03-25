@@ -35,7 +35,7 @@ export function useGrades() {
   const statistics: Statistics = data.statistics;
   const gradesSubjects: SubjectGrades[] = data.subjects;
 
-  for (let i = 0; i <= gradesSubjects.length; i++) {
+  for (let i = 0; i < gradesSubjects.length; i++) {
     let subject = gradesSubjects[i] 
     subject.grades.sort((a, b) => dayjs(a.createdAt).diff(dayjs(b.createdAt)))
     console.log(subject)
