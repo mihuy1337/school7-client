@@ -48,10 +48,13 @@ export function useGrades() {
 
   let copyGradesSubjects: SubjectGrades[] = JSON.parse(JSON.stringify(gradesSubjects))
 
-  copyGradesSubjects = copyGradesSubjects.map((subject) => ({
+  copyGradesSubjects = copyGradesSubjects
+  .map((subject) => ({
     ...subject,
     grades: subject.grades.filter((grade) => grade.createdAt === today),
-  }));
+  }))
+  .filter((subject) => subject.grades.length > 0); // Удаляем subjects без оценок
+
 
   console.log(copyGradesSubjects)
 
