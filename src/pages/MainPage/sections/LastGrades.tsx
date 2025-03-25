@@ -1,18 +1,18 @@
 import { Grade } from "../../../components/Grade";
 import { Badge } from "../../../components/ui/Badge";
-import { GroupedGrades } from "../../../hooks/useGrades";
+import { SubjectGrades } from "../../../types/grades.types";
 
 interface Props {
-  latestGroupedGrades: GroupedGrades[]
+  newGrades: SubjectGrades[] | undefined
 }
 
-export function LastGrades({ latestGroupedGrades }: Props) {
-  console.log(latestGroupedGrades)
+export function LastGrades({ newGrades }: Props) {
+  if (!newGrades) return <p>Оценок за сегодня пока что нет</p>
   return (
     <div>
       <h1 className="h1 mb-2">Последние оценки</h1>
         <div className="grid auto-cols-max grid-flow-col gap-4 overflow-auto">
-          {latestGroupedGrades.map((group, index) => (
+          {newGrades.map((group, index) => (
             <div className="space-y-1" key={index}>
               <Badge className="inline-flex text-[12px]">
                 {group.subject.alias ?? group.subject.name}

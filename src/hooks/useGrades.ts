@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query"
 import { Grade, ReportGrades, Statistics, Subject, SubjectGrades } from "../types/grades.types"
 import { gradesService } from "../services/grades.service"
 import dayjs from "dayjs";
-import utc from 'dayjs/plugin/utc';
 
 interface GradeWithFormattedDate extends Grade {
   subject: Subject;
@@ -15,7 +14,7 @@ export interface GroupedGrades {
 }
 
 export function useGrades() {
-  dayjs.extend(utc);
+  const today = dayjs().format('DD/MM')
   const { data, isLoading, isSuccess } = useQuery<ReportGrades>({
     queryKey: ['grades'],
     queryFn: () => gradesService.getGrades(),
@@ -47,11 +46,20 @@ export function useGrades() {
     // console.log(subject)
   }
 
+  let copyGradesSubjects: SubjectGrades[] = JSON.parse(JSON.stringify(gradesSubjects))
+
+  copyGradesSubjects = copyGradesSubjects.map((subject) => ({
+    ...subject,
+    grades: subject.grades.filter((grade) => grade.createdAt === today),
+  }));
+
+  console.log(copyGradesSubjects)
+
   return {
     isLoading,
     isSuccess,
-    // newGroupedGrades,
+    newGrades: copyGradesSubjects,
     statistics,
-    // sortedGrades,
+    sortedGrades: gradesSubjects,
   };
 }

@@ -7,10 +7,11 @@ import { ScheduleSection } from "./sections/ScheduleSection"
 import { StatisticsSection } from "./sections/StatisticsSection"
 import { useGrades } from "../../hooks/useGrades"
 import { Loading } from "../../components/Loading"
+import { LastGrades } from "./sections/LastGrades"
 
 export function MainPage() {
   const navigate = useNavigate()
-  const { statistics, isLoading } = useGrades()
+  const {newGrades, statistics, isLoading } = useGrades()
   return (
     <>
       {!isLoading ? (
@@ -18,7 +19,7 @@ export function MainPage() {
           <Header>Главная</Header>
           <div className="mt-safe-tg-top space-y-4">
             <StatisticsSection statistics={statistics}/>
-            {/* <LastGrades newGroupedGrades={latestGroupedGrades}/> */}
+            <LastGrades newGrades={newGrades}/>
             <ScheduleSection/>
           </div>
           <MyMainButton 
