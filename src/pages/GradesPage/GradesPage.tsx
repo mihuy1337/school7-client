@@ -5,7 +5,7 @@ import { useGrades } from "../../hooks/useGrades";
 
 export function GradesPage() {
   useBackButton()
-  const {allGrades, isLoading} = useGrades(6)
+  const {allGrades, isLoading} = useGrades()
   console.log(allGrades)
   return (
     <>

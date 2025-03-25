@@ -3,14 +3,14 @@ import { MyMainButton } from "../../components/MyMainButton"
 import { MySecondaryButton } from "../../components/MySecondaryButton"
 import { useNavigate } from "react-router"
 import { ScheduleSection } from "./sections/ScheduleSection"
-import { LastGrades } from "./sections/LastGrades"
+// import { LastGrades } from "./sections/LastGrades"
 import { StatisticsSection } from "./sections/StatisticsSection"
 import { useGrades } from "../../hooks/useGrades"
 import { Loading } from "../../components/Loading"
 
 export function MainPage() {
   const navigate = useNavigate()
-  const { statistics, isLoading } = useGrades(6)
+  const { statistics, isLoading } = useGrades()
   return (
     <>
       {!isLoading ? (

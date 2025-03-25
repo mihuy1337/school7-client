@@ -14,7 +14,7 @@ export interface GroupedGrades {
   grades: GradeWithFormattedDate[];
 }
 
-export function useGrades(lastGrades: number) {
+export function useGrades() {
   dayjs.extend(utc);
   const { data, isLoading, isSuccess } = useQuery<ReportGrades>({
     queryKey: ['grades'],
