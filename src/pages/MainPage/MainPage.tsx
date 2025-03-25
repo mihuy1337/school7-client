@@ -10,7 +10,7 @@ import { Loading } from "../../components/Loading"
 
 export function MainPage() {
   const navigate = useNavigate()
-  const { latestGroupedGrades, statistics, isLoading } = useGrades(6)
+  const { statistics, isLoading } = useGrades(6)
   return (
     <>
       {!isLoading ? (
@@ -18,7 +18,7 @@ export function MainPage() {
           <Header>Главная</Header>
           <div className="mt-safe-tg-top space-y-4">
             <StatisticsSection statistics={statistics}/>
-            <LastGrades latestGroupedGrades={latestGroupedGrades}/>
+            {/* <LastGrades newGroupedGrades={latestGroupedGrades}/> */}
             <ScheduleSection/>
           </div>
           <MyMainButton 

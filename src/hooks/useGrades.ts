@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 import { Grade, ReportGrades, Statistics, Subject, SubjectGrades } from "../types/grades.types"
 import { gradesService } from "../services/grades.service"
 import dayjs from "dayjs";
+import utc from 'dayjs/plugin/utc';
 
 interface GradeWithFormattedDate extends Grade {
   subject: Subject;
@@ -14,6 +15,7 @@ export interface GroupedGrades {
 }
 
 export function useGrades(lastGrades: number) {
+  dayjs.extend(utc);
   const { data, isLoading, isSuccess } = useQuery<ReportGrades>({
     queryKey: ['grades'],
     queryFn: () => gradesService.getGrades(),
@@ -30,55 +32,31 @@ export function useGrades(lastGrades: number) {
     };
   }
 
+  console.log(data)
+
   const statistics: Statistics = data.statistics;
   const gradesSubjects: SubjectGrades[] = data.subjects;
 
-  // Сортируем все оценки по дате (от старой к новой)
-  const allGrades: GradeWithFormattedDate[] = gradesSubjects.flatMap(subject =>
-    subject.grades.map(grade => ({
+  for (let i = 0; i < gradesSubjects.length; i++) {
+    let subject = gradesSubjects[i];
+
+    // Сортируем копию массива, чтобы не мутировать оригинал
+    subject.grades = [...subject.grades].sort((a, b) => dayjs(a.createdAt).diff(dayjs(b.createdAt)));
+
+    // Форматируем даты в новом массиве
+    subject.grades = subject.grades.map((grade) => ({
       ...grade,
-      subject: subject.subject,
-      createdAt: grade.createdAt,  // оставляем дату как ISO-строку
-    }))
-  );
+      createdAt: dayjs(grade.createdAt).isValid()
+        ? dayjs(grade.createdAt).format('DD/MM')
+        : 'Некорректная дата',
+    }));
 
-  // Сортировка оценок по дате (от самой старой к самой новой)
-  const sortedGrades = allGrades.sort((a, b) =>
-    dayjs(a.createdAt).isBefore(dayjs(b.createdAt)) ? -1 : 1
-  );
-
-  const latestGrades = sortedGrades.slice(0, lastGrades);
-
-  const groupedGradesMap = latestGrades.reduce((acc, grade) => {
-    const subjectId = grade.subject.id;
-    if (!acc.has(subjectId)) {
-      acc.set(subjectId, {
-        subject: grade.subject,
-        grades: [],
-      });
-    }
-    acc.get(subjectId)!.grades.push(grade);
-    return acc;
-  }, new Map<number, GroupedGrades>());
-
-  const latestGroupedGrades = Array.from(groupedGradesMap.values()).sort((a, b) =>
-    dayjs(a.grades[0].createdAt).isBefore(dayjs(b.grades[0].createdAt)) ? -1 : 1
-  );
-
-  // Форматируем сгруппированные оценки (по необходимости)
-  const formattedGroupedGrades = latestGroupedGrades.map(group => ({
-    ...group,
-    grades: group.grades.map(grade => ({
-      ...grade,
-      createdAt: dayjs(grade.createdAt).format('DD.MM'),  // форматируем дату
-    })),
-  }));
+    console.log('Formatted subject:', subject);
+  }
 
   return {
     isLoading,
     isSuccess,
-    latestGroupedGrades: formattedGroupedGrades,
     statistics,
-    allGrades: sortedGrades,  // Возвращаем отсортированные оценки
   };
 }

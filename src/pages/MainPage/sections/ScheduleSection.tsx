@@ -21,10 +21,10 @@ export function ScheduleSection() {
   // Функция для форматирования заголовка
   const formatHeader = (date: dayjs.Dayjs, isToday: boolean, isTomorrow: boolean) => {
     if (isToday) {
-      return `Сегодня, ${date.format('D MMMM')}`;
+      return ['Сегодня', `${date.format('D MMMM')}`];
     }
     if (isTomorrow) {
-      return `Завтра, ${date.format('D MMMM')}`;
+      return ['Завтра', `${date.format('D MMMM')}`];
     }
     // Делаем первую букву заглавной
     const dayName = date.format('dddd');
