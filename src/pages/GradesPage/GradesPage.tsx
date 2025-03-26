@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { Grade } from "../../components/Grade";
 import { Header } from "../../components/Header";
 import { Loading } from "../../components/Loading";
@@ -6,6 +7,7 @@ import { useBackButton } from "../../hooks/useBackButton";
 import { useGrades } from "../../hooks/useGrades";
 
 export function GradesPage() {
+  const today = dayjs().format('DD/MM')
   useBackButton()
   const {sortedGrades, isLoading} = useGrades()
   return (
@@ -18,9 +20,16 @@ export function GradesPage() {
             {sortedGrades.map((subject) => (
               <div className="space-y-2">
                 <h1 className="h2" key={subject.subject.id}>{subject.subject.name}</h1>
-                <div className="grid grid-cols-4 gap-2">
+                <div className="grid grid-cols-3 gap-2">
                   {subject.grades.map((grade, index) => (
-                    <Grade badgeStyles="text-[10px]" key={index} grade={grade.grade} date={grade.createdAt} type={grade.weight.alias}/>
+                    <Grade badgeDayStyles={`border-1 ${
+                      grade.createdAt === today ?
+                       grade.grade >= 5
+                        ? 'border-5-main' : 
+                        grade.grade >= 4 ? 'border-4-main' : 
+                        grade.grade >= 3 ? 'border-3-main' :
+                        'border-2-main' : 'border-transparent'
+                    }`} badgeStyles='text-[10px]' key={index} grade={grade.grade} date={grade.createdAt} type={grade.weight.alias}/>
                   ))}
                 </div>
                 <div className="flex items-center">
