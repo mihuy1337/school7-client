@@ -20,6 +20,8 @@ export function useGrades() {
     };
   }
 
+   console.log(data)
+
   data.subjects.map(subject => subject.grades.map(grade => grade.createdAt = dayjs(grade.createdAt).format('DD/MM')))
   data.allGrades.map(subject => subject.grades.map(grade => grade.createdAt = dayjs(grade.createdAt).format('DD/MM')))
 
