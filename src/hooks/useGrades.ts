@@ -2,10 +2,8 @@ import { useQuery } from "@tanstack/react-query"
 import { ReportGrades, Statistics, SubjectGrades } from "../types/grades.types"
 import { gradesService } from "../services/grades.service"
 import dayjs from "dayjs";
-import cloneDeep from 'lodash.clonedeep';
 
 export function useGrades() {
-  const today = dayjs().format('DD/MM');
   const { data, isLoading, isSuccess } = useQuery<ReportGrades>({
     queryKey: ['grades'],
     queryFn: () => gradesService.getGrades(),
@@ -22,33 +20,17 @@ export function useGrades() {
     };
   }
 
-  // Полная глубокая копия всего объекта data
-  const clonedData: ReportGrades = cloneDeep(data);
-  const statistics: Statistics = clonedData.statistics;
-  
-  // Работаем с копией subjects
-  const gradesSubjects: SubjectGrades[] = clonedData.subjects.map((subject) => ({
-    ...subject,
-    grades: subject.grades.map((grade) => ({
-      ...grade,
-      createdAt: dayjs(grade.createdAt).format('DD/MM'),
-    })).sort((a, b) => dayjs(a.createdAt, 'DD/MM').diff(dayjs(b.createdAt, 'DD/MM'))),
-  }));
+  data.subjects.map(subject => subject.grades.map(grade => grade.createdAt = dayjs(grade.createdAt).format('DD/MM')))
+  data.allGrades.map(subject => subject.grades.map(grade => grade.createdAt = dayjs(grade.createdAt).format('DD/MM')))
 
-  // Фильтруем оценки за сегодня
-  const copyGradesSubjects: SubjectGrades[] = gradesSubjects
-    .map((subject) => ({
-      ...subject,
-      grades: subject.grades.filter((grade) => grade.createdAt === today),
-    }))
-    .filter((subject) => subject.grades.length > 0);
+  console.log(data)
 
   return {
     isLoading,
     isSuccess,
-    newGrades: copyGradesSubjects,
-    statistics,
-    sortedGrades: gradesSubjects,
+    newGrades: data.allGrades,
+    statistics: data.statistics,
+    sortedGrades: data.subjects,
   };
 }
 

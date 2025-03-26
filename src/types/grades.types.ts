@@ -34,4 +34,5 @@ export interface Statistics {
 export interface ReportGrades {
   subjects: SubjectGrades[];
   statistics: Statistics;
+  allGrades: SubjectGrades[];
 }
