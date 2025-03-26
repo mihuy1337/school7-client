@@ -22,10 +22,23 @@ export function useGrades() {
 
    console.log(data)
 
-  data.subjects.map(subject => subject.grades.map(grade => grade.createdAt = dayjs(grade.createdAt).format('DD/MM')))
-  data.allGrades.map(subject => subject.grades.map(grade => grade.createdAt = dayjs(grade.createdAt).format('DD/MM')))
+   data.subjects?.forEach(subject => 
+    subject.grades?.forEach(grade => {
+      if (grade.createdAt) {
+        grade.createdAt = dayjs(grade.createdAt).format('DD/MM');
+      }
+    })
+  );
 
-  console.log(data)
+  data.allGrades?.forEach(subject => 
+    subject.grades?.forEach(grade => {
+      if (grade.createdAt) {
+        grade.createdAt = dayjs(grade.createdAt).format('DD/MM');
+      }
+    })
+  );
+
+  console.log(data);
 
   return {
     isLoading,
