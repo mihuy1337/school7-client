@@ -5,17 +5,19 @@ import { useGrades } from "../../hooks/useGrades";
 
 export function GradesPage() {
   useBackButton()
-  const {newGrades, isLoading} = useGrades()
+  const {sortedGrades, isLoading} = useGrades()
   return (
     <>
       {!isLoading ? (
         <>
           <Header>Оценки</Header>
-          <div className="mt-safe-tg-top">
-            {newGrades.map((subject) => (
+          {sortedGrades === undefined ? <p>Ничего неет...</p> : (
+            <div className="mt-safe-tg-top">
+            {sortedGrades.map((subject) => (
               <h1 key={subject.subject.id}>{subject.subject.name}</h1>
             ))}
           </div>
+          )}
         </>
       ) : (
         <Loading/>
