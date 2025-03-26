@@ -18,9 +18,9 @@ export function GradesPage() {
             {sortedGrades.map((subject) => (
               <div className="space-y-2">
                 <h1 className="h2" key={subject.subject.id}>{subject.subject.name}</h1>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-4 gap-2">
                   {subject.grades.map((grade, index) => (
-                    <Grade  key={index} grade={grade.grade} date={grade.createdAt} type={grade.weight.alias}/>
+                    <Grade badgeStyles="text-[10px]" key={index} grade={grade.grade} date={grade.createdAt} type={grade.weight.alias}/>
                   ))}
                 </div>
                 <div className="flex items-center">
