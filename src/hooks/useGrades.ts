@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { ReportGrades, Statistics, SubjectGrades } from "../types/grades.types"
+import { ReportGrades } from "../types/grades.types"
 import { gradesService } from "../services/grades.service"
 import dayjs from "dayjs";
 
