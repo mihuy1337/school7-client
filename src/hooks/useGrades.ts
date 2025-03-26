@@ -20,32 +20,31 @@ export function useGrades() {
     };
   }
 
-   console.log(data)
-
-   data.subjects?.forEach(subject => 
-    subject.grades?.forEach(grade => {
-      if (grade.createdAt) {
-        grade.createdAt = dayjs(grade.createdAt).format('DD/MM');
-      }
-    })
-  );
-
-  data.allGrades?.forEach(subject => 
-    subject.grades?.forEach(grade => {
-      if (grade.createdAt) {
-        grade.createdAt = dayjs(grade.createdAt).format('DD/MM');
-      }
-    })
-  );
-
-  console.log(data);
+  const formattedData = {
+    ...data,
+    subjects: data.subjects.map(subject => ({
+      ...subject,
+      grades: subject.grades.map(grade => ({
+        ...grade,
+        createdAt: dayjs(grade.createdAt).format('DD/MM'),
+      })),
+    })),
+    newGrades: data.newGrades.map(subject => ({
+      ...subject,
+      grades: subject.grades.map(grade => ({
+        ...grade,
+        createdAt: dayjs(grade.createdAt).format('DD/MM'),
+      })),
+    })),
+  };
 
   return {
     isLoading,
     isSuccess,
-    newGrades: data.allGrades,
-    statistics: data.statistics,
-    sortedGrades: data.subjects,
+    newGrades: formattedData.newGrades,
+    statistics: formattedData.statistics,
+    sortedGrades: formattedData.subjects,
   };
 }
+
 
