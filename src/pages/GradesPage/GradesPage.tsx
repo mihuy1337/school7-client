@@ -22,14 +22,14 @@ export function GradesPage() {
                 <h1 className="h2" key={subject.subject.id}>{subject.subject.name}</h1>
                 <div className="grid grid-cols-3 gap-2">
                   {subject.grades.map((grade, index) => (
-                    <Grade badgeDayStyles={`border-1 ${
+                    <Grade badgeDayStyles={
                       grade.createdAt === today ?
                        grade.grade >= 5
-                        ? 'border-5-main' : 
-                        grade.grade >= 4 ? 'border-4-main' : 
-                        grade.grade >= 3 ? 'border-3-main' :
-                        'border-2-main' : 'border-transparent'
-                    }`} badgeStyles='text-[10px]' key={index} grade={grade.grade} date={grade.createdAt} type={grade.weight.alias}/>
+                        ? 'bg-5-main text-black-main' : 
+                        grade.grade >= 4 ? 'bg-4-main text-black-main' : 
+                        grade.grade >= 3 ? 'bg-3-main text-black-main' :
+                        'bg-2-main text-black-main' : ''
+                    } badgeStyles='text-[10px]' key={index} grade={grade.grade} date={grade.createdAt} type={grade.weight.alias}/>
                   ))}
                 </div>
                 <div className="flex items-center">
