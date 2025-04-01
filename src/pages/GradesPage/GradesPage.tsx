@@ -5,10 +5,14 @@ import { Loading } from "../../components/Loading";
 import { Badge } from "../../components/ui/Badge";
 import { useBackButton } from "../../hooks/useBackButton";
 import { useGrades } from "../../hooks/useGrades";
+import { MySecondaryButton } from "../../components/MySecondaryButton";
+import { useNavigate } from "react-router";
+import { MyMainButton } from "../../components/MyMainButton";
 
 export function GradesPage() {
   const today = dayjs().format('DD/MM')
   useBackButton()
+  const navigate = useNavigate()
   const {sortedGrades, isLoading} = useGrades()
   return (
     <>
@@ -48,6 +52,8 @@ export function GradesPage() {
             ))}
           </div>
           )}
+          <MyMainButton text="Итоговые"/>
+          <MySecondaryButton text="На главную" onClick={() => navigate('/')}/>
         </>
       ) : (
         <Loading/>
