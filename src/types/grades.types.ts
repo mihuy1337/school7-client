@@ -36,3 +36,16 @@ export interface ReportGrades {
   statistics: Statistics;
   newGrades: SubjectGrades[];
 }
+
+interface FinalGradePeriod {
+  id: number;
+  name: string;
+  grade: number;
+}
+
+export interface FinalGrades {
+  id: number;
+  name: string;
+  alias: string | null;
+  finalGradePeriods: FinalGradePeriod[];
+}

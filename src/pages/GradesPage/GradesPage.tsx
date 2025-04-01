@@ -3,7 +3,6 @@ import { Grade } from "../../components/Grade";
 import { Header } from "../../components/Header";
 import { Loading } from "../../components/Loading";
 import { Badge } from "../../components/ui/Badge";
-import { useBackButton } from "../../hooks/useBackButton";
 import { useGrades } from "../../hooks/useGrades";
 import { MySecondaryButton } from "../../components/MySecondaryButton";
 import { useNavigate } from "react-router";
@@ -11,7 +10,6 @@ import { MyMainButton } from "../../components/MyMainButton";
 
 export function GradesPage() {
   const today = dayjs().format('DD/MM')
-  useBackButton()
   const navigate = useNavigate()
   const {sortedGrades, isLoading} = useGrades()
   return (
@@ -24,7 +22,7 @@ export function GradesPage() {
             {sortedGrades.map((subject) => (
               <div className="space-y-2">
                 <h1 className="h2" key={subject.subject.id}>{subject.subject.name}</h1>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-3 gap-1">
                   {subject.grades.map((grade, index) => (
                     <Grade badgeDayStyles={
                       grade.createdAt === today ?
@@ -52,7 +50,7 @@ export function GradesPage() {
             ))}
           </div>
           )}
-          <MyMainButton text="Итоговые"/>
+          <MyMainButton text="Итоговые" onClick={() => navigate('/grades/final')}/>
           <MySecondaryButton text="На главную" onClick={() => navigate('/')}/>
         </>
       ) : (

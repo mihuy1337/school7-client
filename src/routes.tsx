@@ -9,6 +9,7 @@ import { IsAuth } from "./middleware/isAuth";
 import { ActivatePage } from "./pages/AuthPages/ActivatePage";
 import { Page404 } from "./components/404";
 import { GradesPage } from "./pages/GradesPage/GradesPage";
+import { FinalGradesPage } from "./pages/GradesPage/FinalGradesPage";
 
 
 export function AppRoutes() {
@@ -23,6 +24,7 @@ export function AppRoutes() {
       <Route path="/activate" element={<ActivatePage/>}/>
       <Route path="/404" element={<Page404 isPage={true}/>}/>
       <Route path="/grades" element={<GradesPage/>}/>
+      <Route path="/grades/final" element={<FinalGradesPage/>}/>
     </Routes>
   );
 }

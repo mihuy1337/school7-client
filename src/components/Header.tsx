@@ -30,9 +30,6 @@ export const Header = ({ children }: Props) => {
           paddingTop: "var(--spacing-header-padding)",
           paddingBottom: "var(--spacing-header-padding)"
         }}>
-        {WebApp.initDataUnsafe.user?.photo_url && (
-          <img className="h-[var(--header-div-height)] rounded-[8px] mr-2" src={WebApp.initDataUnsafe.user?.photo_url}/>
-        )}
         <div ref={divRef} className="text-center font-medium rounded-[8px]  border-accent/40 backdrop-blur-sm bg-accent/10 text-accent px-3 py-0.5">
           {children}
         </div>
