@@ -5,6 +5,7 @@ import { MyMainButton } from "../../components/MyMainButton"
 import { MySecondaryButton } from "../../components/MySecondaryButton"
 import { useFinalGrades } from "../../hooks/useFinalGrades"
 import { Grade } from "../../components/Grade"
+import { twMerge } from "tailwind-merge"
 
 export function FinalGradesPage() {
   const {isLoading, finalGrades} = useFinalGrades()
@@ -24,11 +25,12 @@ export function FinalGradesPage() {
                       <div className="grid grid-cols-3 gap-1">
                       {subject.finalGradePeriods.map((grade, index) =>{
                         return (
-                          <div key={index} className={index === subject.finalGradePeriods.length - 1 ? "col-span-3" : ""}>
-                            <Grade badgeStyles="text-[12px]" grade={grade.grade} type={grade.name} />
-                          </div>
+                          <Grade key={index} badgeStyles="text-[12px]" grade={grade.grade} type={grade.name} />
                         );
                     })}
+                        <div>
+                          <Grade grade={Number(subject.average.toFixed(2))} type='Итоговая' badgeStyles={twMerge("text-black-main", subject.average == 5 ? "bg-5-main" : subject.average >= 4 ? "bg-4-main" : subject.average >= 3 ? "bg-3-main" : "bg0-2-main")}/>
+                        </div>
                       </div>
                     ) : (
                       <p>Оценок нет</p>
