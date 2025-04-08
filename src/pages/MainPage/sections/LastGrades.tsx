@@ -17,7 +17,7 @@ export function LastGrades({ newGrades }: Props) {
               <Badge className="inline-flex text-[12px]">
                 {group.subject.alias ?? group.subject.name}
               </Badge>
-              <div className="flex gap-1">
+              <div className="flex flex-wrap gap-1 bg-black-main">
                 {group.grades.map((grade, index) => (
                   <Grade key={index} grade={grade.grade} type={grade.weight.name && grade.weight.alias} date={grade.createdAt}/>
                 ))}

@@ -32,7 +32,7 @@ export function Table({data, weekday, date}: TableProps) {
         )}>{`до ${data.length} урока`}</Badge>
         <Badge className="text-[12px]">{date}</Badge>
       </div>
-      <div className="bg-black-secondary rounded-lg border-[0.5px] border-black-main w-full">
+      <div className="bg-black-secondary rounded-lg border-black-main w-full">
         {data.map((item, index) => (
           <div className="font-medium text-[14px] max-mobile-large:text-[14px]" key={index}>
             <div className="py-2.5 px-4 inline-flex justify-between w-full">

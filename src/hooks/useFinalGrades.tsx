@@ -17,9 +17,20 @@ export function useFinalGrades() {
     };
   }
 
+  const finalGradesWithAnnualGrade = data.map((finalGrade) => {
+    const annualGrades: number[] = finalGrade.finalGradePeriods.map(period => period.grade);
+    const average = annualGrades.reduce((acc, grade) => acc + grade, 0) / annualGrades.length;
+  
+    return {
+      ...finalGrade,
+      average,
+    };
+  });
+  
+
   return {
     isLoading,
     isSuccess,
-    finalGrades: data
+    finalGrades: finalGradesWithAnnualGrade
   };
 }

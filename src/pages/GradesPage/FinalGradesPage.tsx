@@ -25,7 +25,7 @@ export function FinalGradesPage() {
                       {subject.finalGradePeriods.map((grade, index) =>{
                         return (
                           <div key={index} className={index === subject.finalGradePeriods.length - 1 ? "col-span-3" : ""}>
-                            <Grade gradeStyles="text-5xl" badgeStyles="text-[12px]" grade={grade.grade} type={grade.name} />
+                            <Grade badgeStyles="text-[12px]" grade={grade.grade} type={grade.name} />
                           </div>
                         );
                     })}
