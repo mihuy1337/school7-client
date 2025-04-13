@@ -28,8 +28,8 @@ export function FinalGradesPage() {
                           <Grade key={index} badgeStyles="text-[12px]" grade={grade.grade} type={grade.name} />
                         );
                     })}
-                        <div>
-                          <Grade grade={Number(subject.average.toFixed(2))} type='Итоговая' badgeStyles={twMerge("text-black-main", subject.average == 5 ? "bg-5-main" : subject.average >= 4 ? "bg-4-main" : subject.average >= 3 ? "bg-3-main" : "bg0-2-main")}/>
+                        <div className="col-span-2">
+                          <Grade picClassName="-bottom-5 right-5 h-[130%]" grade={Number(subject.average.toFixed(2))} type='Итоговая' badgeStyles={twMerge("text-black-main", subject.average == 5 ? "bg-5-main" : subject.average >= 4 ? "bg-4-main" : subject.average >= 3 ? "bg-3-main" : "bg-2-main")}/>
                         </div>
                       </div>
                     ) : (

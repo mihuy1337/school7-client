@@ -8,14 +8,15 @@ interface Props {
   className?: string,
   badgeStyles?: string,
   badgeDayStyles?: string
+  picClassName?: string
   type: string
 }
 
-export function Grade({grade, date, type, className, badgeStyles, badgeDayStyles}: Props) {
+export function Grade({grade, date, type, className, badgeStyles, badgeDayStyles, picClassName}: Props) {
   return (
     <div className={twMerge('overflow-hidden p-2 rounded-lg relative', grade >= 5 ? 'bg-5-main/10' : grade >= 4 ? 'bg-4-main/10' : grade >= 3 ? 'bg-3-main/10' : 'bg-2-main/10', className)}>
       <div className="relative z-10">
-        <div className={twMerge('font-semibold text-4xl', grade >= 5 ? 'text-5-main' : grade >= 4 ? 'text-4-main' : grade >= 3 ? 'text-3-main' : 'text-2-main')}>{grade}</div>
+        <div className={twMerge('font-semibold text-4xl', grade >= 5 ? 'text-5-main' : grade >= 4 ? 'text-4-main' : grade >= 3 ? 'text-3-main' : 'text-2-main')}>{String(grade).replace('.', ', ')}</div>
         <div className="flex flex-wrap-reverse gap-1">
           <Badge className={twMerge(
             grade !== undefined
@@ -48,7 +49,7 @@ export function Grade({grade, date, type, className, badgeStyles, badgeDayStyles
       {grade !== undefined && (
           <img
             className={twMerge(
-              "absolute -bottom-1 -right-2.5 scale-x-[-1] h-[90%] z-0 object-contain pointer-events-none",
+              "absolute -bottom-1 -right-2.5 scale-x-[-1] h-[90%] z-0 object-contain pointer-events-none", picClassName
             )}
             src={
               grade >= 5
