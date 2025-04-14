@@ -17,7 +17,6 @@ import { useNavigate } from "react-router";
 export function RegistrationPage() {
   const navigate = useNavigate()
   const { data, isLoading, isSuccess } = useClasses();
-  // const [isSubmitting, setIsSubmitting] = useState(false);
   const role = useAtomValue(roleAtom);
 
   useBackButton();
@@ -30,13 +29,11 @@ export function RegistrationPage() {
     mutationKey: ["auth"],
     mutationFn: (data: IRegisterForm) => authService.register(data),
     onSuccess() {
-      // setIsSubmitting(false);
       navigate('/')
       reset();
     },
     onError() {
-      // setIsSubmitting(false);
-      WebApp.showAlert("Пользователь с таким юзернеймом уже существует!");
+      WebApp.showAlert("Произошла ошибка!");
     },
   });
 
